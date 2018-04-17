@@ -41,10 +41,10 @@ def render_text(shape, **kwargs):
             paragraph.runs[0].text = new_text
 
 
-def render_table(self, shape, **kwargs):
+def render_table(shape, **kwargs):
     for row in shape.table.rows:
         for cell in row.cells:
-            self._render_text(cell, **kwargs)
+            render_text(cell, **kwargs)
 
 
 def get_shape_by_name(prs, name):
