@@ -13,6 +13,7 @@ How to use it:
 
 Lets assume that you have a template file named \_\_template\_\_.pptx with two shapes: *presentation_title* and
 *client_name* (as shown in the image below), in order to render it you might use the following code:
+
 ![](images/template1.png)
 
     from pypyt import *
