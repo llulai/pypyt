@@ -31,7 +31,8 @@ This will render a presentation like the one below.
 
 There are three main objects: Paragraphs, Charts and Tables.
 
-- Paragraph: There are two options, you might want to replace the whole text or a placeholder within the paragraph.
+## Paragraph
+There are two options, you might want to replace the whole text or a placeholder within the paragraph.
 If you want to replace the whole text, pass a dictionary where the key is the name of the shape in the PowerPoint
 template, and the value is the string to be rendered. If you want to render placeholders within the shape, add the
 placeholders keys wrapped in curly brackets {}, then create a dictionary with the key having the name of the shape in
@@ -54,7 +55,7 @@ strings to be rendered.
 
 ![](images/output2.png)
 
-- Charts:
+## Charts
 
 ![](images/template3.png)
 
@@ -73,7 +74,7 @@ strings to be rendered.
 
 ![](images/output3.png)
     
-- Tables:
+## Tables
 
 ![](images/template4.png)
 
