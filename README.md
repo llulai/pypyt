@@ -15,13 +15,16 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
 *client_name* (as shown in the image below), in order to render it you might use the following code:
 
 ![](images/template1.png)
-
+````
     from pypyt import *
+
     values = {
         'presentation_title': "This is a cool presentation",
         'client_name': "Cool Client"
     }
+
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+````
     
 This will render a presentation like the one below.
 ![](images/output1.png)
@@ -39,8 +42,10 @@ placeholders keys wrapped in curly brackets {}, then create a dictionary with th
 the presentation and the value another dictionary where the keys are the names of placeholders and the values are the
 strings to be rendered.
 
+- Template
 ![](images/template2.png)
 
+- Code
 ````
     values = {
         'slide_title': "Cool insight",
@@ -53,19 +58,16 @@ strings to be rendered.
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
 ````
 
-
+- Output
 ![](images/output2.png)
 
 ## Charts
-- Template
 
+- Template
 ![](images/template3.png)
 
 - Code
-
-
 ````
-
     values = {
         'chart' {
             'title': "Cool Graph",
@@ -81,14 +83,15 @@ strings to be rendered.
 ````
 
 - Output
-
 ![](images/output3.png)
     
 ## Tables
 
+- Template
 ![](images/template4.png)
 
-    
+- Code
+ ````   
     values = {
         'table': [
             ['header1', 'header2', 'header3'],
@@ -98,5 +101,7 @@ strings to be rendered.
     }
     
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
-    
+````
+
+- Output
 ![](images/output4.png)
