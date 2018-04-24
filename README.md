@@ -16,7 +16,7 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
 
 ![](images/template1.png)
 ````python
-    from pypyt import *
+    from pypyt import render_and_save_ppt
 
     values = {
         'presentation_title': "This is a cool presentation",
