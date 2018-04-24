@@ -1,0 +1,6 @@
+.idea/* 
+.ipynb_checkpoints/* 
+build/* 
+dist/* 
+pypyt/__pycache__/* 
+pypyt.egg-info/* 
