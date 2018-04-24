@@ -15,7 +15,7 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
 *client_name* (as shown in the image below), in order to render it you might use the following code:
 
 ![](images/template1.png)
-````
+````python
     from pypyt import *
 
     values = {
@@ -46,7 +46,7 @@ strings to be rendered.
 ![](images/template2.png)
 
 - Code
-````
+````python
     values = {
         'slide_title': "Cool insight",
         'slide_text':{
@@ -67,9 +67,9 @@ strings to be rendered.
 ![](images/template3.png)
 
 - Code
-````
+````python
     values = {
-        'chart' {
+        'chart': {
             'title': "Cool Graph",
             'data': {
                 'displays': [500, 750, 600, 450, 500, 700, 550],
@@ -91,7 +91,7 @@ strings to be rendered.
 ![](images/template4.png)
 
 - Code
- ````   
+ ````python
     values = {
         'table': [
             ['header1', 'header2', 'header3'],
