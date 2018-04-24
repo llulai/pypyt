@@ -17,7 +17,10 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
 ![](images/template1.png)
 
     from pypyt import *
-    values = {'presentation_title': "This is a cool presentation", 'client_name': "Cool Client"}
+    values = {
+        'presentation_title': "This is a cool presentation",
+        'client_name': "Cool Client"
+    }
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
     
 This will render a presentation like the one below.
@@ -38,7 +41,6 @@ strings to be rendered.
 ![](images/template2.png)
 
 
-    from pypyt import *
     values = {
         'slide_title': "Cool insight",
         'slide_text':{
@@ -46,7 +48,44 @@ strings to be rendered.
             'cpc_change': 50
         }
     }
+    
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 ![](images/output2.png)
+
+- Charts:
+
+![](images/template3.png)
+
+    values = {
+        'chart' {
+            'title': "Cool Graph",
+            'data': {
+                'displays': [500, 750, 600, 450, 500, 700, 550],
+                'clicks': [250, 150, 350, 300, 175, 275, 125]
+            },
+            'categories': ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7']
+        }
+    }
+    
+    render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+
+![](images/output3.png)
+    
+- Tables:
+
+![](images/template4.png)
+
+    
+    values = {
+        'table': [
+            ['header1', 'header2', 'header3'],
+            ['cell1', 'cell2', 'cell3'],
+            ['cell4', 'cell5', 'cell6']
+        ]
+    }
+    
+    render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    
+![](images/output4.png)
