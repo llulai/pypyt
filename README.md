@@ -49,7 +49,7 @@ strings to be rendered.
 ````python
     values = {
         'slide_title': "Cool insight",
-        'slide_text':{
+        'slide_text': {
             'year': 2018,
             'cpc_change': 50
         }
