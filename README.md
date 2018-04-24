@@ -1,4 +1,4 @@
-# pypyt
+# pypyt 0.0.3
 It is a simple library to render PowerPoint presentations using python
 
 # How to install it:
