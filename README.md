@@ -41,7 +41,7 @@ strings to be rendered.
 
 ![](images/template2.png)
 
-
+````
     values = {
         'slide_title': "Cool insight",
         'slide_text':{
@@ -49,8 +49,9 @@ strings to be rendered.
             'cpc_change': 50
         }
     }
-    
+
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+````
 
 
 ![](images/output2.png)
@@ -63,6 +64,7 @@ strings to be rendered.
 - Code
 
 
+````
 
     values = {
         'chart' {
@@ -76,6 +78,7 @@ strings to be rendered.
     }
     
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+````
 
 - Output
 
