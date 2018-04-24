@@ -63,6 +63,7 @@ strings to be rendered.
 - Code
 
 
+
     values = {
         'chart' {
             'title': "Cool Graph",
