@@ -56,8 +56,12 @@ strings to be rendered.
 ![](images/output2.png)
 
 ## Charts
+- Template
 
 ![](images/template3.png)
+
+- Code
+
 
     values = {
         'chart' {
@@ -71,6 +75,8 @@ strings to be rendered.
     }
     
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+
+- Output
 
 ![](images/output3.png)
     
