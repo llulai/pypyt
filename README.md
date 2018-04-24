@@ -105,3 +105,7 @@ strings to be rendered.
 
 - Output
 ![](images/output4.png)
+
+# Contact
+If you're trying to use this and want to extend it, have any request or need help, just ping me on slack (j.gajardo) or
+send me an email to j.gajardo@criteo.com
