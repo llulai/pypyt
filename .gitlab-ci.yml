@@ -1,4 +1,0 @@
-pylint:
-    script:
-        - pip install pylint
-        - pylint pypyt
