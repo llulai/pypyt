@@ -7,3 +7,4 @@ install:
 
 script:
     - pylint pypyt
+    - pytest
