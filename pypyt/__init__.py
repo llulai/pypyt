@@ -1,3 +1,5 @@
+"""Renders PowerPoint presentations easily with Python"""
+
 import re
 from functools import singledispatch
 from pptx import Presentation
@@ -15,32 +17,40 @@ def open_ppt(filename: str) -> Presentation:
 
 
 def render_ppt(template_name: str, values: dict) -> Presentation:
+    """Returns a rendered presentation given the template name and values to be rendered."""
     # opens the presentation
     prs = open_ppt(template_name)
 
     # checks each given item
-    for k, v in values.items():
+    for key, value in values.items():
 
         # gets all the instances of the item in the presentation
-        for shape in get_shapes_by_name(prs, k):
+        for shape in get_shapes_by_name(prs, key):
 
             # depending on what kind of item it is, it renders it
-            if is_table(shape): render_table(v, shape.table)
-            elif is_paragraph(shape): render_paragraph(v, shape.text_frame)
-            elif is_chart(shape): render_chart(v, shape.chart)
+            if is_table(shape):
+                render_table(value, shape.table)
+            elif is_paragraph(shape):
+                render_paragraph(value, shape.text_frame)
+            elif is_chart(shape):
+                render_chart(value, shape.chart)
 
     return prs
 
 
-def save_ppt(prs: Presentation, filename: str):
+def save_ppt(prs: Presentation, filename: str) -> None:
+    """Saves the given presentation with the given filename"""
     prs.save(filename)
 
 
-def render_and_save_ppt(template_name: str, values: dict, filename: str):
+def render_and_save_ppt(template_name: str, values: dict, filename: str) -> None:
+    """Renders and save a presentation with the given template name,
+    values to be rendered, and filename."""
     save_ppt(render_ppt(template_name, values), filename)
 
 
 def get_shapes_by_name(prs: Presentation, name: str) -> list:
+    """Returns a list of shapes with the given name in the given presentation"""
     return [shape for slide in prs.slides for shape in slide.shapes if shape.name == name]
 
 
@@ -50,9 +60,14 @@ def get_shapes(prs: Presentation) -> dict:
 
 
 def get_shape_type(shape: BaseShape) -> str:
-    if is_paragraph(shape): return 'paragraph'
-    elif is_table(shape): return 'table'
-    elif is_chart(shape): return 'chart'
+    """Returns a string with the kind of the given shape."""
+    if is_paragraph(shape):
+        return 'paragraph'
+    elif is_table(shape):
+        return 'table'
+    elif is_chart(shape):
+        return 'chart'
+    return ''
 
 
 def is_table(shape: BaseShape) -> bool:
@@ -61,30 +76,35 @@ def is_table(shape: BaseShape) -> bool:
 
 
 def is_paragraph(shape: BaseShape) -> bool:
+    """Checks whether the given shape is has a paragraph"""
     return shape.has_text_frame
 
 
 def is_chart(shape: BaseShape) -> bool:
+    """Checks whether the given shape is has a chart"""
     return shape.has_chart
 
 
 # RENDER TABLE
 @singledispatch
-def render_table(_, __):
-    raise NotImplemented
+def render_table(_, __) -> None:
+    """Renders a table with the given values"""
+    raise NotImplementedError
 
 
 @render_table.register(dict)
-def _(values: dict, table: Table):
-    """In the case you want to render placeholders within the table, it will call render_paragraph for each cell"""
+def _(values: dict, table: Table) -> None:
+    """In the case you want to render placeholders within the table,
+    it will call render_paragraph for each cell"""
     for row in table.rows:
         for cell in row.cells:
             render_paragraph(values, cell.text_frame)
 
 
 @render_table.register(list)
-def _(values: list, table: Table):
-    """In the case you want to replace the whole table, it will set the value for each cell in the list"""
+def _(values: list, table: Table) -> None:
+    """In the case you want to replace the whole table,
+    it will set the value for each cell in the list"""
     for i, row in enumerate(table.rows):
         for j, cell in enumerate(row.cells):
             render_paragraph(values[i][j], cell.text_frame)
@@ -92,37 +112,39 @@ def _(values: list, table: Table):
 
 # RENDER PARAGRAPH
 @singledispatch
-def render_paragraph(values, text_frame: TextFrame):
+def render_paragraph(values, text_frame: TextFrame) -> None:
     """In the case you want to replace the whole text"""
     paragraph = text_frame.paragraphs[0]
-    p = paragraph._p
-    for idx, run in enumerate(paragraph.runs):
-        if idx == 0:
-            continue
-        p.remove(run._r)
+    p = paragraph._p  # pylint: disable=protected-access,invalid-name
+    if p:
+        for idx, run in enumerate(paragraph.runs):
+            if idx == 0:
+                continue
+            p.remove(run._r)  # pylint: disable=protected-access
     else:
         paragraph.text = 't'
     paragraph.runs[0].text = values
 
 
 @render_paragraph.register(dict)
-def _(values, text_frame: TextFrame):
+def _(values: dict, text_frame: TextFrame) -> None:
     """In the case you want to replace placeholders within the paragraph"""
     for paragraph in text_frame.paragraphs:
         new_text_template = paragraph.text
         keywords = re.findall(r"\{(\w+)\}", new_text_template)
         if keywords:
             new_text = new_text_template.format(**{k: values[k] for k in keywords})
-            p = paragraph._p
+            p = paragraph._p  # pylint: disable=protected-access,invalid-name
             for idx, run in enumerate(paragraph.runs):
                 if idx == 0:
                     continue
-                p.remove(run._r)
+                p.remove(run._r)  # pylint: disable=protected-access
             paragraph.runs[0].text = new_text
 
 
 # RENDER GRAPH
-def render_chart(values, chart: Chart):
+def render_chart(values: dict, chart: Chart) -> None:
+    """Renders into the given chart the given values."""
     chart_data = ChartData()
 
     chart_data.categories = values['categories']
