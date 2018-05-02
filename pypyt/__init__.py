@@ -8,6 +8,7 @@ from pptx.chart.data import ChartData
 from pptx.shapes.base import BaseShape
 from pptx.shapes.table import Table
 from pptx.text.text import TextFrame
+from pandas import DataFrame
 
 
 # BASE
@@ -143,9 +144,15 @@ def _(values: dict, text_frame: TextFrame) -> None:
 
 
 # RENDER GRAPH
-def render_chart(values: dict, chart: Chart) -> None:
+@singledispatch
+def render_chart(values, _, chart_data=ChartData()) -> None:
     """Renders into the given chart the given values."""
-    chart_data = ChartData()
+    raise NotImplementedError(f"Method not implemented for {type(values)} object type")
+
+
+@render_chart.register(dict)
+def _(values: DataFrame, chart: Chart, chart_data=ChartData()) -> None:
+    """Renders into the given chart the values in the DataFrame."""
 
     chart_data.categories = values['categories']
 
@@ -154,5 +161,20 @@ def render_chart(values: dict, chart: Chart) -> None:
 
     if 'title' in values:
         chart.chart_title.text_frame.text = values['title']
+
+    chart.replace_data(chart_data)
+
+
+@render_chart.register(DataFrame)
+def _(values: DataFrame, chart: Chart, chart_data=ChartData()) -> None:
+    """Renders into the given chart the values in the DataFrame."""
+
+    chart_data.categories = list(values.index)
+
+    for label in list(values):
+        chart_data.add_series(label, list(values[label].values))
+
+    if hasattr(values, 'title'):
+        chart.chart_title.text_frame.text = values.title
 
     chart.replace_data(chart_data)
