@@ -7,4 +7,8 @@ install:
 
 script:
     - pylint pypyt
-    - pytest
+    - coverage run --source pypyt -m pytest
+    - coverage report -m
+
+after_success:
+    - coveralls
