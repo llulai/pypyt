@@ -1,0 +1,7 @@
+image: https://github.com/docker-library/python/blob/886a292a44ec78ab8052d3bd0731f9bdaddcd3f9/3.7-rc/stretch/Dockerfile
+
+before_script:
+    - echo 'test initial'
+
+after_script:
+    - echo 'final'
