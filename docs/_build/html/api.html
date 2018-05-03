@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Documentation &#8212; pypyt 0.0.5 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pypyt">
+<span id="api-documentation"></span><span id="api"></span><h1>API Documentation<a class="headerlink" href="#module-pypyt" title="Permalink to this headline">¶</a></h1>
+<p>For normal use, all you will have to do to get started is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypyt</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>This will import the following:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#pypyt.render_and_save_ppt" title="pypyt.render_and_save_ppt"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_and_save_ppt()</span></code></a> function to render and save a presentation.</li>
+</ul>
+<div class="section" id="rendering-a-presentation">
+<h2>Rendering a presentation<a class="headerlink" href="#rendering-a-presentation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pypyt.render_and_save_ppt">
+<code class="descclassname">pypyt.</code><code class="descname">render_and_save_ppt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_and_save_ppt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders and save a presentation with the given template name,
+values to be rendered, and filename.</p>
+<dl class="docutils">
+<dt>template_name: str</dt>
+<dd>Name of the presentation to be saved.</dd>
+<dt>values: dict</dt>
+<dd>Dictionary with the values to render on the template.</dd>
+<dt>filename: str</dt>
+<dd>Name of the file to be saved.</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;presentation.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Call this function with the template_name, values and file_name and will render and save a presentation.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;presentation.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rendering-paragraphs">
+<h2>Rendering Paragraphs<a class="headerlink" href="#rendering-paragraphs" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="rendering-charts">
+<h2>Rendering Charts<a class="headerlink" href="#rendering-charts" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+<div class="section" id="rendering-tables">
+<h2>Rendering Tables<a class="headerlink" href="#rendering-tables" title="Permalink to this headline">¶</a></h2>
+<p>todo</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#rendering-a-presentation">Rendering a presentation</a></li>
+<li><a class="reference internal" href="#rendering-paragraphs">Rendering Paragraphs</a></li>
+<li><a class="reference internal" href="#rendering-charts">Rendering Charts</a></li>
+<li><a class="reference internal" href="#rendering-tables">Rendering Tables</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Julio Gajardo.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
