@@ -6,3 +6,5 @@ pypyt/__pycache__/*
 pypyt.egg-info/* 
 tests/__pycache__/* 
 .pytest_cache/* 
+.coverage 
+htmlcov/* 
