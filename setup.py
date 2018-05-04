@@ -9,8 +9,11 @@ setup(
     description='Simple library to render ppt templates in python',
     license='MIT',
     url='https://gitlab.criteois.com/j.gajardo/pypyt',
-    packages=['pypyt', 'html_docs'],
+    packages=['pypyt'],
     install_requires=['python-pptx'],
+    package_data={
+        'pypyt': ['html_docs/*', 'html_docs/_images/*']
+    }
 )
 
 __author__ = 'Julio Gajardo'
