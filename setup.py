@@ -9,7 +9,7 @@ setup(
     description='Simple library to render ppt templates in python',
     license='MIT',
     url='https://gitlab.criteois.com/j.gajardo/pypyt',
-    packages=['pypyt', 'html_doccs'],
+    packages=['pypyt', 'html_docs'],
     install_requires=['python-pptx'],
 )
 
