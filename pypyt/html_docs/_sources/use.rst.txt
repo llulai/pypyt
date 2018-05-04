@@ -102,7 +102,7 @@ Code::
 Table from pandas DataFrame (option 2)
 ......................................
 
-If you want to use the DataFrame's column names as header, you should set the *header* attribute to `True`
+If you want to use the DataFrame's column names as header, you should set the ``header`` attribute to ``True``
 
 Code::
 
@@ -159,7 +159,7 @@ Code::
 Chart from pandas DataFrame
 ...........................
 You can also build a chart from a DataFrame, the column names will be used as the series names, the values as it values
-and the index as the categories, if you want to set the title, you should add the attribute *title* to the DataFrame.
+and the index as the categories, if you want to set the title, you should add the attribute ``title`` to the DataFrame.
 
 Code::
 
