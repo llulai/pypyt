@@ -1,0 +1,485 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Documentation &#8212; pypyt 0.0.5 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="User Reference" href="use.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="use.html" title="User Reference"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pypyt 0.0.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pypyt">
+<span id="api-documentation"></span><span id="api"></span><h1>API Documentation<a class="headerlink" href="#module-pypyt" title="Permalink to this headline">¶</a></h1>
+<p>For normal use, all you will have to do to get started is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypyt</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>This will import the following functions:</p>
+<p>Template Functions</p>
+<ul class="simple">
+<li>The <code class="xref py py-func docutils literal notranslate"><span class="pre">open_template()</span></code> function opens a template.</li>
+<li>The <a class="reference internal" href="#pypyt.render_template" title="pypyt.render_template"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_template()</span></code></a> function to renders a template.</li>
+<li>The <a class="reference internal" href="#pypyt.render_and_save_template" title="pypyt.render_and_save_template"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_and_save_template()</span></code></a> function renders and saves a template.</li>
+</ul>
+<p>Presentation Functions:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#pypyt.render_ppt" title="pypyt.render_ppt"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_ppt()</span></code></a> function renders a presentation.</li>
+<li>The <a class="reference internal" href="#pypyt.save_ppt" title="pypyt.save_ppt"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_ppt()</span></code></a> function saves a presentation.</li>
+<li>The <a class="reference internal" href="#pypyt.render_and_save_ppt" title="pypyt.render_and_save_ppt"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_and_save_ppt()</span></code></a> function renders and save a presentation.</li>
+<li>The <a class="reference internal" href="#pypyt.get_shapes" title="pypyt.get_shapes"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_shapes()</span></code></a> function gets all the shapes and its type in a presentation.</li>
+<li>The <a class="reference internal" href="#pypyt.get_shapes_by_name" title="pypyt.get_shapes_by_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_shapes_by_name()</span></code></a> function gets all the shapes with the given name in a presentation.</li>
+</ul>
+<p>Shape Functions:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#pypyt.get_shape_type" title="pypyt.get_shape_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_shape_type()</span></code></a> function gets the type of a shape.</li>
+<li>The <a class="reference internal" href="#pypyt.is_table" title="pypyt.is_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_table()</span></code></a> function returns <cite>True</cite> if the given shape is a table.</li>
+<li>The <a class="reference internal" href="#pypyt.is_paragraph" title="pypyt.is_paragraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_paragraph()</span></code></a> function returns <cite>True</cite> if the given shape is a paragraph.</li>
+<li>The <a class="reference internal" href="#pypyt.is_chart" title="pypyt.is_chart"><code class="xref py py-func docutils literal notranslate"><span class="pre">is_chart()</span></code></a> function returns <cite>True</cite> if the given shape is a chart.</li>
+</ul>
+<p>Render Functions:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#pypyt.render_table" title="pypyt.render_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_table()</span></code></a> function renders a table object.</li>
+<li>The <a class="reference internal" href="#pypyt.render_paragraph" title="pypyt.render_paragraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_paragraph()</span></code></a> function renders a paragraph object.</li>
+<li>The <a class="reference internal" href="#pypyt.render_chart" title="pypyt.render_chart"><code class="xref py py-func docutils literal notranslate"><span class="pre">render_chart()</span></code></a> function renders a chart object.</li>
+</ul>
+<p>Documentation Functions:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#pypyt.pypyt_doc" title="pypyt.pypyt_doc"><code class="xref py py-func docutils literal notranslate"><span class="pre">pypyt_doc()</span></code></a> function opens this documentation.</li>
+</ul>
+<div class="section" id="template-functions">
+<h2>Template Functions<a class="headerlink" href="#template-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pypyt.render_template">
+<code class="descclassname">pypyt.</code><code class="descname">render_template</code><span class="sig-paren">(</span><em>template_name</em>, <em>values</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a rendered presentation given the template name and values to be rendered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>template_name</strong> (<em>str</em>) – Name of the presentation to be rendered.</li>
+<li><strong>values</strong> (<em>dict</em>) – Dictionary with the values to render on the template.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Rendered presentation</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pptx.presentation.Presentation</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="go">&lt;pptx.presentation.Presentation at ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.render_and_save_template">
+<code class="descclassname">pypyt.</code><code class="descname">render_and_save_template</code><span class="sig-paren">(</span><em>template_name</em>, <em>values</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_and_save_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders and save a presentation with the given template name,
+values to be rendered, and filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>template_name</strong> (<em>str</em>) – Name of the presentation to be saved.</li>
+<li><strong>values</strong> (<em>dict</em>) – Dictionary with the values to render on the template.</li>
+<li><strong>filename</strong> (<em>str</em>) – Name of the file to be saved.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;presentation.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="presentation-functions">
+<h2>Presentation Functions<a class="headerlink" href="#presentation-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pypyt.open_ppt">
+<code class="descclassname">pypyt.</code><code class="descname">open_ppt</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.open_ppt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a pptx file given the filename and returns it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – The name of the file to be open.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Presentation object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pptx.presentation.Presentation</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Open a ppt for later use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
+<span class="go">&lt;pptx.presentation.Presentation at ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.render_ppt">
+<code class="descclassname">pypyt.</code><code class="descname">render_ppt</code><span class="sig-paren">(</span><em>prs</em>, <em>values</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_ppt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a rendered presentation given the template name and values to be rendered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>prs</strong> (<em>pptx.presentation.Presentation</em>) – Presentation to be rendered.</li>
+<li><strong>values</strong> (<em>dict</em>) – Dictionary with the values to render on the template.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Rendered presentation</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pptx.presentation.Presentation</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">open_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_ppt</span><span class="p">(</span><span class="n">prs</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="go">&lt;pptx.presentation.Presentation at ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.save_ppt">
+<code class="descclassname">pypyt.</code><code class="descname">save_ppt</code><span class="sig-paren">(</span><em>prs</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.save_ppt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the given presentation with the given filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>prs</strong> (<em>pptx.presentation.Presentation</em>) – Presentation to be saved.</li>
+<li><strong>filename</strong> (<em>str</em>) – Name of the file to be saved.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rendered_prs</span> <span class="o">=</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">save_ppt</span><span class="p">(</span><span class="n">rendered_prs</span><span class="p">,</span> <span class="s1">&#39;presentation.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.render_and_save_ppt">
+<code class="descclassname">pypyt.</code><code class="descname">render_and_save_ppt</code><span class="sig-paren">(</span><em>template_name</em>, <em>values</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_and_save_ppt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders and save a presentation with the given template name,
+values to be rendered, and filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>template_name</strong> (<em>str</em>) – Name of the presentation to be saved.</li>
+<li><strong>values</strong> (<em>dict</em>) – Dictionary with the values to render on the template.</li>
+<li><strong>filename</strong> (<em>str</em>) – Name of the file to be saved.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presentation_title&#39;</span><span class="p">:</span> <span class="s2">&quot;My Cool Presentation&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;presentation.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.get_shapes">
+<code class="descclassname">pypyt.</code><code class="descname">get_shapes</code><span class="sig-paren">(</span><em>prs</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.get_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of tuples with the shape name and shape type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prs</strong> (<em>pptx.presentation.Presentation</em>) – Presentation to get the shapes from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Tuple with the shapes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">open_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_shapes</span><span class="p">(</span><span class="n">prs</span><span class="p">)</span>
+<span class="go">((&#39;client_name&#39;, &#39;paragraph&#39;),</span>
+<span class="go"> (&#39;presentation_title&#39;, &#39;paragraph&#39;),</span>
+<span class="go"> (&#39;slide_text&#39;, &#39;paragraph&#39;),</span>
+<span class="go"> (&#39;slide_title&#39;, &#39;paragraph&#39;),</span>
+<span class="go"> (&#39;chart&#39;, &#39;chart&#39;),</span>
+<span class="go"> (&#39;Title 1&#39;, &#39;paragraph&#39;),</span>
+<span class="go"> (&#39;table&#39;, &#39;table&#39;),</span>
+<span class="go"> (&#39;Title 1&#39;, &#39;paragraph&#39;))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.get_shapes_by_name">
+<code class="descclassname">pypyt.</code><code class="descname">get_shapes_by_name</code><span class="sig-paren">(</span><em>prs</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.get_shapes_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of shapes with the given name in the given presentation.
+:param prs: Presentation to be saved.
+:type prs: pptx.presentation.Presentation
+:param name: Name of the shape(s) to be returned.
+:type name: str</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">open_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_shapes_by_name</span><span class="p">(</span><span class="n">prs</span><span class="p">,</span> <span class="s1">&#39;chart&#39;</span><span class="p">)</span>
+<span class="go">[&lt;pptx.shapes.placeholder.PlaceholderGraphicFrame at ...&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="shape-functions">
+<h2>Shape Functions<a class="headerlink" href="#shape-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pypyt.get_shape_type">
+<code class="descclassname">pypyt.</code><code class="descname">get_shape_type</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.get_shape_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string with the kind of the given shape.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>shape</strong> (<em>BaseShape</em>) – Shape to get the type from.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String representing the type of the shape</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">open_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shapes</span> <span class="o">=</span> <span class="n">get_shapes_by_name</span><span class="p">(</span><span class="n">prs</span><span class="p">,</span> <span class="s1">&#39;client_name&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_shape_type</span><span class="p">(</span><span class="n">shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&#39;paragraph&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.is_table">
+<code class="descclassname">pypyt.</code><code class="descname">is_table</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.is_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given shape is has a table</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.is_paragraph">
+<code class="descclassname">pypyt.</code><code class="descname">is_paragraph</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.is_paragraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given shape is has a paragraph</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.is_chart">
+<code class="descclassname">pypyt.</code><code class="descname">is_chart</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.is_chart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given shape is has a chart</p>
+</dd></dl>
+
+</div>
+<div class="section" id="render-functions">
+<h2>Render Functions<a class="headerlink" href="#render-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pypyt.render_table">
+<code class="descclassname">pypyt.</code><code class="descname">render_table</code><span class="sig-paren">(</span><em>values</em>, <em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a table with the given values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>values</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>list</em><em>, </em><em>DataFrame</em><em>]</em>) – Values to render the table</li>
+<li><strong>table</strong> (<em>Table</em>) – Table object to be rendered.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.render_paragraph">
+<code class="descclassname">pypyt.</code><code class="descname">render_paragraph</code><span class="sig-paren">(</span><em>values</em>, <em>text_frame</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_paragraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the case you want to replace the whole text.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>values</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>str</em><em>, </em><em>int</em><em>, </em><em>float</em><em>]</em>) – Values to render the text.</li>
+<li><strong>text_frame</strong> (<em>TextFrame</em>) – TextFrame object to be rendered.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pypyt.render_chart">
+<code class="descclassname">pypyt.</code><code class="descname">render_chart</code><span class="sig-paren">(</span><em>values</em>, <em>chart</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.render_chart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the given values into the given chart.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>values</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>DataFrame</em><em>]</em>) – Values to render the chart.</li>
+<li><strong>chart</strong> (<em>Chart</em>) – Chart object to be rendered.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Render a chart from a dictionary</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">open_ppt</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chart_values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">        &#39;title&#39;: &quot;My Cool Graph&quot;,</span>
+<span class="go">        &#39;categories&#39;: [&#39;d1&#39;, &#39;d2&#39;, &#39;d3&#39;],</span>
+<span class="go">        &#39;data&#39;:{</span>
+<span class="go">            &#39;displays&#39;: [500, 750, 600],</span>
+<span class="go">            &#39;clicks&#39;: [150, 250, 200]</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shapes</span> <span class="o">=</span> <span class="n">get_shapes_by_name</span><span class="p">(</span><span class="n">prs</span><span class="p">,</span> <span class="s1">&#39;chart&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_chart</span><span class="p">(</span><span class="n">chart_values</span><span class="p">,</span> <span class="n">shape</span><span class="o">.</span><span class="n">chart</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="documentation-functions">
+<h2>Documentation Functions<a class="headerlink" href="#documentation-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pypyt.pypyt_doc">
+<code class="descclassname">pypyt.</code><code class="descname">pypyt_doc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.pypyt_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens pypyt documentation in the browser.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#template-functions">Template Functions</a></li>
+<li><a class="reference internal" href="#presentation-functions">Presentation Functions</a></li>
+<li><a class="reference internal" href="#shape-functions">Shape Functions</a></li>
+<li><a class="reference internal" href="#render-functions">Render Functions</a></li>
+<li><a class="reference internal" href="#documentation-functions">Documentation Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="use.html"
+                        title="previous chapter">User Reference</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="use.html" title="User Reference"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pypyt 0.0.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Julio Gajardo.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>

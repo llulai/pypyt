@@ -432,14 +432,8 @@ def _(values: DataFrame, chart: Chart) -> None:
     chart.replace_data(chart_data)
 
 
-def pypyt_doc(function=None):
+def pypyt_doc():
     """Opens pypyt documentation in the browser."""
 
-    if function:
-        filepath = os.path.realpath('docs/_build/html/api.html')
-        filepath += '#pypyt.' + function.__name__
-    else:
-        filepath = os.path.realpath('docs/_build/html/index.html')
-
-    print(filepath)
+    filepath = os.path.realpath('html_doc/index.html')
     webbrowser.open(f'file:///{filepath}')

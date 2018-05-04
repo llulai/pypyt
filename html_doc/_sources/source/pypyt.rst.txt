@@ -1,0 +1,10 @@
+pypyt package
+=============
+
+Module contents
+---------------
+
+.. automodule:: pypyt
+    :members:
+    :undoc-members:
+    :show-inheritance:
