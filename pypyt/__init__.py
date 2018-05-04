@@ -1,6 +1,8 @@
 """Renders PowerPoint presentations easily with Python"""
 
 import re
+import os
+import webbrowser
 from functools import singledispatch
 from pptx import Presentation
 from pptx.chart.chart import Chart
@@ -29,6 +31,8 @@ def open_ppt(filename: str) -> Presentation:
 
     Examples
     --------
+    Open a ppt for later use
+
     >>> open_ppt('template.pptx')
     <pptx.presentation.Presentation at ...>
     """
@@ -124,10 +128,35 @@ def save_ppt(prs: Presentation, filename: str) -> None:
     prs.save(filename)
 
 
-def render_and_save_ppt(template_name: str, values: dict, filename: str) -> None:
+def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
     """
     Renders and save a presentation with the given template name,
     values to be rendered, and filename.
+
+    Parameters
+    ----------
+    template_name: str
+        Name of the presentation to be saved.
+
+    values: dict
+        Dictionary with the values to render on the template.
+
+    filename: str
+        Name of the file to be saved.
+
+    Examples
+    --------
+    >>> values = {'presentation_title': "My Cool Presentation"}
+    >>> render_and_save_ppt('template.pptx', values, 'presentation.pptx')
+    """
+    save_ppt(render_ppt(prs, values), filename)
+
+
+def render_and_save_template(template_name: str, values: dict, filename: str) -> None:
+    """
+    Renders and save a presentation with the given template name,
+    values to be rendered, and filename.
+
     Parameters
     ----------
     template_name: str
@@ -347,6 +376,24 @@ def render_chart(values: Union[dict, DataFrame], chart: Chart) -> None:  # pylin
 
     chart: Chart
         Chart object to be rendered.
+
+    Examples
+    --------
+
+    Render a chart from a dictionary
+
+    >>> prs = open_ppt('template.pptx')
+    >>> chart_values = {
+            'title': "My Cool Graph",
+            'categories': ['d1', 'd2', 'd3'],
+            'data':{
+                'displays': [500, 750, 600],
+                'clicks': [150, 250, 200]
+            }
+        }
+    >>> shapes = get_shapes_by_name(prs, 'chart')
+    >>> shape = shapes[0]
+    >>> render_chart(chart_values, shape.chart)
     """
     raise NotImplementedError(f"Method not implemented for {type(values)} object type")
 
@@ -383,3 +430,16 @@ def _(values: DataFrame, chart: Chart) -> None:
         chart.chart_title.text_frame.text = values.title
 
     chart.replace_data(chart_data)
+
+
+def pypyt_doc(function=None):
+    """Opens pypyt documentation in the browser."""
+
+    if function:
+        filepath = os.path.realpath('docs/_build/html/api.html')
+        filepath += '#pypyt.' + function.__name__
+    else:
+        filepath = os.path.realpath('docs/_build/html/index.html')
+
+    print(filepath)
+    webbrowser.open(f'file:///{filepath}')
