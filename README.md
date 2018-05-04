@@ -36,3 +36,7 @@ This will render a presentation like the one below.
     from pypyt import pypyt_doc
     pypyt_doc()
 ````
+
+# Contact
+If you're trying to use this and want to extend it, have any request or need help, just ping me on slack (j.gajardo) or
+send me an email to j.gajardo@criteo.com
