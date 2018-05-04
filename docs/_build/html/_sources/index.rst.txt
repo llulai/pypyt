@@ -13,8 +13,8 @@ Getting Started
 First of all, you need to create a template file with the objects names as shown in
 `this video <https://www.youtube.com/watch?v=IhES3of_9Nw>`_
 
-Lets assume that you have a template file named *\_\_template\_\_.pptx* with two shapes: *presentation_title* and
-*client_name* as shown in the image below.
+Lets assume that you have a template file named ``__template__.pptx`` with two shapes: ``presentation_title`` and
+``client_name`` as shown in the image below.
 
 .. image:: images/template1.png
 

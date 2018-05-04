@@ -4,6 +4,7 @@ import re
 import os
 import webbrowser
 from functools import singledispatch
+from typing import Union
 from pptx import Presentation
 from pptx.chart.chart import Chart
 from pptx.chart.data import CategoryChartData
@@ -11,17 +12,18 @@ from pptx.shapes.base import BaseShape
 from pptx.shapes.table import Table
 from pptx.text.text import TextFrame
 from pandas import DataFrame
-from typing import Union
 
 
-# BASE
-def open_ppt(filename: str) -> Presentation:
+
+# TEMPLATE FUNCTIONS
+
+def open_template(template_name: str) -> Presentation:
     """
-    Opens a pptx file given the filename and returns it.
+    Opens a pptx file given the template_name and returns it.
 
     Parameters
     ----------
-    filename: str
+    template_name: str
         The name of the file to be open.
 
     Returns
@@ -31,12 +33,129 @@ def open_ppt(filename: str) -> Presentation:
 
     Examples
     --------
-    Open a ppt for later use
+    Open a ppt template for later use
 
-    >>> open_ppt('template.pptx')
+    >>> open_template('template.pptx')
     <pptx.presentation.Presentation at ...>
     """
-    return Presentation(filename)
+    return Presentation(template_name)
+
+
+def render_template(template_name: str, values: dict) -> Presentation:
+    """
+    Returns a rendered presentation given the template name and values to be rendered.
+
+    Parameters
+    ----------
+    template_name: str
+        Name of the presentation to be rendered.
+
+    values: dict
+        Dictionary with the values to render on the template.
+
+    Returns
+    -------
+    pptx.presentation.Presentation
+        Rendered presentation
+
+    Examples
+    --------
+
+    Render a template.
+
+    >>> values = {'presentation_title': "My Cool Presentation"}
+    >>> render_template('template.pptx', values)
+    <pptx.presentation.Presentation at ...>
+    """
+    return render_ppt(open_template(template_name), values)
+
+
+def render_and_save_template(template_name: str, values: dict, filename: str) -> None:
+    """
+    Renders and save a presentation with the given template name,
+    values to be rendered, and filename.
+
+    Parameters
+    ----------
+    template_name: str
+        Name of the presentation to be saved.
+
+    values: dict
+        Dictionary with the values to render on the template.
+
+    filename: str
+        Name of the file to be saved.
+
+    Examples
+    --------
+
+    Render and save a template
+
+    >>> values = {'presentation_title': "My Cool Presentation"}
+    >>> render_and_save_template('template.pptx', values, 'presentation.pptx')
+    """
+    save_ppt(render_template(template_name, values), filename)
+
+
+# PRESENTATION FUNCTIONS
+
+def get_shapes(prs: Presentation) -> tuple:
+    """
+    Returns a tuple of tuples with the shape name and shape type.
+
+    Parameters
+    ----------
+    prs: pptx.presentation.Presentation
+        Presentation to get the shapes from.
+
+    Returns
+    -------
+    tuple:
+        Tuple with the shapes.
+
+    Examples
+    --------
+
+    Get all the shapes in a presentation.
+
+    >>> prs = open_template('template.pptx')
+    >>> get_shapes(prs)
+    (('client_name', 'paragraph'),
+     ('presentation_title', 'paragraph'),
+     ('slide_text', 'paragraph'),
+     ('slide_title', 'paragraph'),
+     ('chart', 'chart'),
+     ('Title 1', 'paragraph'),
+     ('table', 'table'),
+     ('Title 1', 'paragraph'))
+    """
+    return tuple((shape.name, get_shape_type(shape))
+                 for slide in prs.slides
+                 for shape in slide.shapes)
+
+
+def get_shapes_by_name(prs: Presentation, name: str) -> list:
+    """
+    Returns a list of shapes with the given name in the given presentation.
+    Parameters
+    ----------
+    prs: pptx.presentation.Presentation
+        Presentation to be saved.
+
+    name: str
+        Name of the shape(s) to be returned.
+
+    Examples
+    --------
+
+    Get all the shapes named 'chart' in a presentation.
+
+    >>> prs = open_template('template.pptx')
+    >>> get_shapes_by_name(prs, 'chart')
+    [<pptx.shapes.placeholder.PlaceholderGraphicFrame at ...>]
+
+    """
+    return [shape for slide in prs.slides for shape in slide.shapes if shape.name == name]
 
 
 def render_ppt(prs: Presentation, values: dict) -> Presentation:
@@ -58,7 +177,10 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
 
     Examples
     --------
-    >>> prs = open_ppt('template.pptx')
+
+    Open a template and render it.
+
+    >>> prs = open_template('template.pptx')
     >>> values = {'presentation_title': "My Cool Presentation"}
     >>> render_ppt(prs, values)
     <pptx.presentation.Presentation at ...>
@@ -81,53 +203,6 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
     return prs
 
 
-def render_template(template_name: str, values: dict) -> Presentation:
-    """
-    Returns a rendered presentation given the template name and values to be rendered.
-
-    Parameters
-    ----------
-    template_name: str
-        Name of the presentation to be rendered.
-
-    values: dict
-        Dictionary with the values to render on the template.
-
-    Returns
-    -------
-    pptx.presentation.Presentation
-        Rendered presentation
-
-    Examples
-    --------
-    >>> values = {'presentation_title': "My Cool Presentation"}
-    >>> render_template('template.pptx', values)
-    <pptx.presentation.Presentation at ...>
-    """
-    return render_ppt(open_ppt(template_name), values)
-
-
-def save_ppt(prs: Presentation, filename: str) -> None:
-    """
-    Saves the given presentation with the given filename.
-
-    Parameters
-    ----------
-    prs: pptx.presentation.Presentation
-        Presentation to be saved.
-
-    filename: str
-        Name of the file to be saved.
-
-    Examples
-    --------
-    >>> values = {'presentation_title': "My Cool Presentation"}
-    >>> rendered_prs = render_template('template.pptx', values)
-    >>> save_ppt(rendered_prs, 'presentation.pptx')
-    """
-    prs.save(filename)
-
-
 def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
     """
     Renders and save a presentation with the given template name,
@@ -146,85 +221,41 @@ def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
 
     Examples
     --------
+
+    Open a template, render it and save it.
+
     >>> values = {'presentation_title': "My Cool Presentation"}
-    >>> render_and_save_ppt('template.pptx', values, 'presentation.pptx')
+    >>> prs = open_template('template.pptx')
+    >>> render_and_save_ppt(prs, values, 'presentation.pptx')
     """
     save_ppt(render_ppt(prs, values), filename)
 
 
-def render_and_save_template(template_name: str, values: dict, filename: str) -> None:
+def save_ppt(prs: Presentation, filename: str) -> None:
     """
-    Renders and save a presentation with the given template name,
-    values to be rendered, and filename.
+    Saves the given presentation with the given filename.
 
     Parameters
     ----------
-    template_name: str
-        Name of the presentation to be saved.
-
-    values: dict
-        Dictionary with the values to render on the template.
+    prs: pptx.presentation.Presentation
+        Presentation to be saved.
 
     filename: str
         Name of the file to be saved.
 
     Examples
     --------
+
+    Render a template and save it.
+
     >>> values = {'presentation_title': "My Cool Presentation"}
-    >>> render_and_save_ppt('template.pptx', values, 'presentation.pptx')
+    >>> rendered_prs = render_template('template.pptx', values)
+    >>> save_ppt(rendered_prs, 'presentation.pptx')
     """
-    save_ppt(render_template(template_name, values), filename)
+    prs.save(filename)
 
 
-def get_shapes_by_name(prs: Presentation, name: str) -> list:
-    """
-    Returns a list of shapes with the given name in the given presentation.
-    Parameters
-    ----------
-    prs: pptx.presentation.Presentation
-        Presentation to be saved.
-
-    name: str
-        Name of the shape(s) to be returned.
-
-    Examples
-    --------
-    >>> prs = open_ppt('template.pptx')
-    >>> get_shapes_by_name(prs, 'chart')
-    [<pptx.shapes.placeholder.PlaceholderGraphicFrame at ...>]
-
-    """
-    return [shape for slide in prs.slides for shape in slide.shapes if shape.name == name]
-
-
-def get_shapes(prs: Presentation) -> tuple:
-    """
-    Returns a tuple of tuples with the shape name and shape type.
-
-    Parameters
-    ----------
-    prs: pptx.presentation.Presentation
-        Presentation to get the shapes from.
-
-    Returns
-    -------
-    tuple:
-        Tuple with the shapes.
-
-    Examples
-    --------
-    >>> prs = open_ppt('template.pptx')
-    >>> get_shapes(prs)
-    (('client_name', 'paragraph'),
-     ('presentation_title', 'paragraph'),
-     ('slide_text', 'paragraph'),
-     ('slide_title', 'paragraph'),
-     ('chart', 'chart'),
-     ('Title 1', 'paragraph'),
-     ('table', 'table'),
-     ('Title 1', 'paragraph'))
-    """
-    return tuple((shape.name, get_shape_type(shape)) for slide in prs.slides for shape in slide.shapes)
+# SHAPE FUNCTIONS
 
 
 def get_shape_type(shape: BaseShape) -> str:
@@ -233,7 +264,7 @@ def get_shape_type(shape: BaseShape) -> str:
 
     Parameters
     ----------
-    shape: BaseShape
+    shape: pptx.shapes.BaseShape
         Shape to get the type from.
 
     Returns
@@ -243,7 +274,10 @@ def get_shape_type(shape: BaseShape) -> str:
 
     Examples
     --------
-    >>> prs = open_ppt('template.pptx')
+
+    Get the type of a shape.
+
+    >>> prs = open_template('template.pptx')
     >>> shapes = get_shapes_by_name(prs, 'client_name')
     >>> get_shape_type(shapes[0])
     'paragraph'
@@ -257,113 +291,89 @@ def get_shape_type(shape: BaseShape) -> str:
     return ''
 
 
-def is_table(shape: BaseShape) -> bool:
-    """Checks whether the given shape is has a table"""
-    return shape.has_table
-
-
-def is_paragraph(shape: BaseShape) -> bool:
-    """Checks whether the given shape is has a paragraph"""
-    return shape.has_text_frame
-
-
 def is_chart(shape: BaseShape) -> bool:
-    """Checks whether the given shape is has a chart"""
+    """
+    Checks whether the given shape is a chart.
+
+    Parameters
+    ----------
+    shape: pptx.shapes.base.BaseShape
+        Shape to get whether is a chart or not.
+
+    Returns
+    -------
+    bool:
+        Boolean representing whether the given shape is a table or no.
+
+    Examples
+    --------
+
+    Check whether the given shape is a table.
+
+    >>> prs = open_template('template.pptx')
+    >>> shapes = get_shapes_by_name(prs, 'client_name')
+    >>> is_chart(shapes[0])
+    True
+    """
     return shape.has_chart
 
 
-# RENDER TABLE
-@singledispatch
-def render_table(values: Union[dict, list, DataFrame], table: Table) -> None:  # pylint: disable=unused-argument
+def is_paragraph(shape: BaseShape) -> bool:
     """
-    Renders a table with the given values.
+    Checks whether the given shape is a paragraph.
 
     Parameters
     ----------
-    values: Union[dict, list, DataFrame]
-        Values to render the table
+    shape: pptx.shapes.base.BaseShape
+        Shape to get whether is a paragraph or not.
 
-    table: Table
-        Table object to be rendered.
+    Returns
+    -------
+    bool:
+        Boolean representing whether the given shape is a table or no.
+
+    Examples
+    --------
+
+    Check whether the given shape is a table.
+
+    >>> prs = open_template('template.pptx')
+    >>> shapes = get_shapes_by_name(prs, 'client_name')
+    >>> is_paragraph(shapes[0])
+    True
     """
-    raise NotImplementedError
+    return shape.has_text_frame
 
 
-@render_table.register(dict)
-def _(values: dict, table: Table) -> None:
-    """In the case you want to render placeholders within the table,
-    it will call render_paragraph for each cell"""
-    for row in table.rows:
-        for cell in row.cells:
-            render_paragraph(values, cell.text_frame)
-
-
-@render_table.register(DataFrame)
-def _(values: DataFrame, table: Table) -> None:
-    # TODO: raise error if size(values) != size(table)
-    table_rows = iter(table.rows)
-
-    if hasattr(values, 'header') and values.header:
-        for values_cell, table_cell in zip(list(values), next(table_rows)):
-            render_paragraph(values_cell, table_cell.text_frame)
-
-    for values_row, table_row in zip(list(values.values), table_rows):
-        for values_cell, table_cell in zip(list(values_row), table_row.cells):
-            render_paragraph(values_cell, table_cell.text_frame)
-
-
-@render_table.register(list)
-def _(values: list, table: Table) -> None:
-    """In the case you want to replace the whole table,
-    it will set the value for each cell in the list"""
-    # TODO: raise error if size(values) != size(table)
-    for values_row, table_row in zip(values, table.rows):
-        for values_cell, table_cell in zip(values_row, table_row.cells):
-            render_paragraph(values_cell, table_cell.text_frame)
-
-
-# RENDER PARAGRAPH
-@singledispatch
-def render_paragraph(values, text_frame: TextFrame) -> None:
+def is_table(shape: BaseShape) -> bool:
     """
-    In the case you want to replace the whole text.
+    Checks whether the given shape is a table.
 
     Parameters
     ----------
-    values: Union[dict, str, int, float]
-        Values to render the text.
+    shape: pptx.shapes.base.BaseShape
+        Shape to get whether is a table or not.
 
-    text_frame: TextFrame
-        TextFrame object to be rendered.
+    Returns
+    -------
+    bool:
+        Boolean representing whether the given shape is a table or no.
+
+    Examples
+    --------
+
+    Check whether the given shape is a table.
+
+    >>> prs = open_template('template.pptx')
+    >>> shapes = get_shapes_by_name(prs, 'client_name')
+    >>> is_table(shapes[0])
+    False
     """
-    paragraph = text_frame.paragraphs[0]
-    p = paragraph._p  # pylint: disable=protected-access,invalid-name
-    for idx, run in enumerate(paragraph.runs):
-        if idx == 0:
-            continue
-        p.remove(run._r)  # pylint: disable=protected-access
-    else:
-        paragraph.text = 't'
-    paragraph.runs[0].text = values
+    return shape.has_table
 
 
-@render_paragraph.register(dict)
-def _(values: dict, text_frame: TextFrame) -> None:
-    """In the case you want to replace placeholders within the paragraph"""
-    for paragraph in text_frame.paragraphs:
-        new_text_template = paragraph.text
-        keywords = re.findall(r"\{(\w+)\}", new_text_template)
-        if keywords:
-            new_text = new_text_template.format(**{k: values[k] for k in keywords})
-            p = paragraph._p  # pylint: disable=protected-access,invalid-name
-            for idx, run in enumerate(paragraph.runs):
-                if idx == 0:
-                    continue
-                p.remove(run._r)  # pylint: disable=protected-access
-            paragraph.runs[0].text = new_text
+# RENDER FUNCTIONS
 
-
-# RENDER GRAPH
 @singledispatch
 def render_chart(values: Union[dict, DataFrame], chart: Chart) -> None:  # pylint: disable=unused-argument
     """
@@ -371,10 +381,10 @@ def render_chart(values: Union[dict, DataFrame], chart: Chart) -> None:  # pylin
 
     Parameters
     ----------
-    values: Union[dict, DataFrame]
+    values: dict or pandas.DataFrame
         Values to render the chart.
 
-    chart: Chart
+    chart: pptx.chart.chart.Chart
         Chart object to be rendered.
 
     Examples
@@ -382,18 +392,47 @@ def render_chart(values: Union[dict, DataFrame], chart: Chart) -> None:  # pylin
 
     Render a chart from a dictionary
 
-    >>> prs = open_ppt('template.pptx')
+    >>> prs = open_template('template.pptx')
     >>> chart_values = {
-            'title': "My Cool Graph",
-            'categories': ['d1', 'd2', 'd3'],
-            'data':{
-                'displays': [500, 750, 600],
-                'clicks': [150, 250, 200]
-            }
-        }
+    ...        'title': "My Cool Graph",
+    ...        'categories': ['d1', 'd2', 'd3'],
+    ...        'data':{
+    ...            'displays': [500, 750, 600],
+    ...            'clicks': [150, 250, 200]
+    ...        }
+    ...    }
     >>> shapes = get_shapes_by_name(prs, 'chart')
     >>> shape = shapes[0]
     >>> render_chart(chart_values, shape.chart)
+
+    Render a chart for a pandas DataFrame
+
+    >>> prs = open_template('template.pptx')
+    >>> data = [
+    ...     [250, 500],
+    ...     [150, 750],
+    ...     [350, 600],
+    ...     [300, 450],
+    ...     [175, 500],
+    ...     [275, 700],
+    ...     [125, 550],
+    ... ]
+    >>> pd_chart = pd.DataFrame(data,
+    ...                         index=['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'],
+    ...                         columns=['clicks', 'displays'])
+    >>> pd_chart
+      clicks  displays
+    0    250       500
+    1    150       750
+    2    350       600
+    3    300       500
+    4    175       500
+    5    275       700
+    6    125       550
+    >>> pd_chart.title = "Cool Graph"
+    >>> shapes = get_shapes_by_name(prs, 'chart')
+    >>> shape = shapes[0]
+    >>> render_chart(pd_chart, shape.chart)
     """
     raise NotImplementedError(f"Method not implemented for {type(values)} object type")
 
@@ -431,6 +470,176 @@ def _(values: DataFrame, chart: Chart) -> None:
 
     chart.replace_data(chart_data)
 
+
+@singledispatch
+def render_paragraph(values, text_frame: TextFrame) -> None:
+    """
+    In the case you want to replace the whole text.
+
+    Parameters
+    ----------
+    values: dict, str, int or float
+        Values to render the text.
+
+    text_frame: pptx.text.text.TextFrame
+        TextFrame object to be rendered.
+
+    Examples
+    --------
+
+    Replace full text.
+
+    >>> prs = open_template('template.pptx')
+    >>> paragraph = {
+    ...     'slide_title': "Cool insight",
+    ... }
+    >>> shapes = get_shapes_by_name(prs, 'slide_title')
+    >>> shape = shapes[0]
+    >>> render_table(paragraph, shape.text_frame)
+
+
+    Replace placeholders within text.
+
+    >>> prs = open_template('template.pptx')
+    >>> paragraph = {
+    ...     'slide_text': {
+    ...         'year': 2018,
+    ...         'cpc_change': 50
+    ...     }
+    ... }
+    >>> shapes = get_shapes_by_name(prs, 'slide_text')
+    >>> shape = shapes[0]
+    >>> render_table(paragraph, shape.text_frame)
+    """
+    paragraph = text_frame.paragraphs[0]
+    p = paragraph._p  # pylint: disable=protected-access,invalid-name
+    for idx, run in enumerate(paragraph.runs):
+        if idx == 0:
+            continue
+        p.remove(run._r)  # pylint: disable=protected-access
+    else:
+        paragraph.text = 't'
+    paragraph.runs[0].text = values
+
+
+@render_paragraph.register(dict)
+def _(values: dict, text_frame: TextFrame) -> None:
+    """In the case you want to replace placeholders within the paragraph"""
+    for paragraph in text_frame.paragraphs:
+        new_text_template = paragraph.text
+        keywords = re.findall(r"\{(\w+)\}", new_text_template)
+        if keywords:
+            new_text = new_text_template.format(**{k: values[k] for k in keywords})
+            p = paragraph._p  # pylint: disable=protected-access,invalid-name
+            for idx, run in enumerate(paragraph.runs):
+                if idx == 0:
+                    continue
+                p.remove(run._r)  # pylint: disable=protected-access
+            paragraph.runs[0].text = new_text
+
+
+@singledispatch
+def render_table(values: Union[dict, list, DataFrame], table: Table) -> None:  # pylint: disable=unused-argument
+    """
+    Renders a table with the given values.
+
+    Parameters
+    ----------
+    values: dict, list or pandas.DataFrame
+        Values to render the table
+
+    table: pptx.shapes.table.Table
+        Table object to be rendered.
+
+    Examples
+    --------
+
+    Render table from python list
+
+    >>> prs = open_template('template.pptx')
+    >>> table: [
+    ...     ['header1', 'header2', 'header3'],
+    ...     ['cell1', 'cell2', 'cell3'],
+    ...     ['cell4', 'cell5', 'cell6']
+    ... ]
+    >>> shapes = get_shapes_by_name(prs, 'table')
+    >>> shape = shapes[0]
+    >>> render_table(table, shape.table)
+
+
+    Render table from pandas DataFrame without header
+
+    >>> prs = open_template('template.pptx')
+    >>> data = [
+    ...     ['header', 'header2', 'header3'],
+    ...     ['cell1', 'cell2', 'cell3'],
+    ...     ['cell4', 'cell5', 'cell6']
+    ... ]
+    >>> table_df = pd.DataFrame(data)
+    >>> table_df
+        col1     col2     col3
+    0   header1  header2  header3
+    1   cell1    cell2    cell3
+    2   cell4    cell5    cell6
+    >>> shapes = get_shapes_by_name(prs, 'table')
+    >>> shape = shapes[0]
+    >>> render_chart(table_df, shape.table)
+
+
+    Render a table from a pandas DataFrame with header.
+
+    >>> prs = open_template('template.pptx')
+    >>> data = [
+    ...     ['cell1', 'cell2', 'cell3'],
+    ...     ['cell4', 'cell5', 'cell6']
+    ... ]
+    >>> table_df = pd.DataFrame(data, columns=['header', 'header2', 'header3'])
+    >>> table_df
+        header1  header2  header3
+    0   cell1    cell2    cell3
+    1   cell4    cell5    cell6
+    >>> table_df.header = True
+    >>> shapes = get_shapes_by_name(prs, 'table')
+    >>> shape = shapes[0]
+    >>> render_chart(table_df, shape.table)
+    """
+    raise NotImplementedError
+
+
+@render_table.register(dict)
+def _(values: dict, table: Table) -> None:
+    """In the case you want to render placeholders within the table,
+    it will call render_paragraph for each cell"""
+    for row in table.rows:
+        for cell in row.cells:
+            render_paragraph(values, cell.text_frame)
+
+
+@render_table.register(DataFrame)
+def _(values: DataFrame, table: Table) -> None:
+    # TODO: raise error if size(values) != size(table)
+    table_rows = iter(table.rows)
+
+    if hasattr(values, 'header') and values.header:
+        for values_cell, table_cell in zip(list(values), next(table_rows)):
+            render_paragraph(values_cell, table_cell.text_frame)
+
+    for values_row, table_row in zip(list(values.values), table_rows):
+        for values_cell, table_cell in zip(list(values_row), table_row.cells):
+            render_paragraph(values_cell, table_cell.text_frame)
+
+
+@render_table.register(list)
+def _(values: list, table: Table) -> None:
+    """In the case you want to replace the whole table,
+    it will set the value for each cell in the list"""
+    # TODO: raise error if size(values) != size(table)
+    for values_row, table_row in zip(values, table.rows):
+        for values_cell, table_cell in zip(values_row, table_row.cells):
+            render_paragraph(values_cell, table_cell.text_frame)
+
+
+# DOCUMENTATION FUNCTIONS
 
 def pypyt_doc():
     """Opens pypyt documentation in the browser."""
