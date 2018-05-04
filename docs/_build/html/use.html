@@ -1,0 +1,347 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>User Reference &#8212; pypyt 0.0.5 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Documentation" href="api.html" />
+    <link rel="prev" title="Welcome to pypyt’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pypyt’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pypyt 0.0.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="user-reference">
+<span id="use"></span><h1>User Reference<a class="headerlink" href="#user-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="paragraph">
+<h2>Paragraph<a class="headerlink" href="#paragraph" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template">
+<h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/template2.png" src="_images/template2.png" />
+</div>
+<div class="section" id="replace-full-text">
+<h3>Replace full text<a class="headerlink" href="#replace-full-text" title="Permalink to this headline">¶</a></h3>
+<p>If you want to replace the whole text of the shape, you just need to define a dictionary, with the name of the
+shape as the key, and the text you want to render as the value.</p>
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;slide_title&#39;</span><span class="p">:</span> <span class="s2">&quot;Cool insight&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace-placeholders-within-the-text">
+<h3>Replace placeholders within the text<a class="headerlink" href="#replace-placeholders-within-the-text" title="Permalink to this headline">¶</a></h3>
+<p>If you want to render placeholders within the paragraph, the value of the dictionary has to be another
+dictionary, with the placeholders as keys, and the text to be replaced as values.</p>
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;slide_text&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">2018</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;cpc_change&#39;</span><span class="p">:</span> <span class="mi">50</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/output2.png" src="_images/output2.png" />
+</div>
+</div>
+<div class="section" id="rendering-tables">
+<h2>Rendering Tables<a class="headerlink" href="#rendering-tables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Template<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/template4.png" src="_images/template4.png" />
+</div>
+<div class="section" id="table-from-list">
+<h3>Table from list<a class="headerlink" href="#table-from-list" title="Permalink to this headline">¶</a></h3>
+<p>In order to render a table, just pass the value of each cell as a list of lists.</p>
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;header1&#39;</span><span class="p">,</span> <span class="s1">&#39;header2&#39;</span><span class="p">,</span> <span class="s1">&#39;header3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;cell1&#39;</span><span class="p">,</span> <span class="s1">&#39;cell2&#39;</span><span class="p">,</span> <span class="s1">&#39;cell3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;cell4&#39;</span><span class="p">,</span> <span class="s1">&#39;cell5&#39;</span><span class="p">,</span> <span class="s1">&#39;cell6&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">... </span><span class="p">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="table-from-pandas-dataframe-option-1">
+<h3>Table from pandas DataFrame (option 1)<a class="headerlink" href="#table-from-pandas-dataframe-option-1" title="Permalink to this headline">¶</a></h3>
+<p>In the case you want to render the values of a DataFrame in the table, just pass the DataFrame instead of the
+list of lists.</p>
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="s1">&#39;header2&#39;</span><span class="p">,</span> <span class="s1">&#39;header3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;cell1&#39;</span><span class="p">,</span> <span class="s1">&#39;cell2&#39;</span><span class="p">,</span> <span class="s1">&#39;cell3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;cell4&#39;</span><span class="p">,</span> <span class="s1">&#39;cell5&#39;</span><span class="p">,</span> <span class="s1">&#39;cell6&#39;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_df</span>
+
+<span class="go">    col1     col2     col3</span>
+<span class="go">0   header1  header2  header3</span>
+<span class="go">1   cell1    cell2    cell3</span>
+<span class="go">2   cell4    cell5    cell6</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="n">table_df</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="table-from-pandas-dataframe-option-2">
+<h3>Table from pandas DataFrame (option 2)<a class="headerlink" href="#table-from-pandas-dataframe-option-2" title="Permalink to this headline">¶</a></h3>
+<p>If you want to use the DataFrame’s column names as header, you should set the <em>header</em> attribute to <cite>True</cite></p>
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;cell1&#39;</span><span class="p">,</span> <span class="s1">&#39;cell2&#39;</span><span class="p">,</span> <span class="s1">&#39;cell3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;cell4&#39;</span><span class="p">,</span> <span class="s1">&#39;cell5&#39;</span><span class="p">,</span> <span class="s1">&#39;cell6&#39;</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">,</span> <span class="s1">&#39;header2&#39;</span><span class="p">,</span> <span class="s1">&#39;header3&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_df</span>
+
+<span class="go">    header1  header2  header3</span>
+<span class="go">0   cell1    cell2    cell3</span>
+<span class="go">1   cell4    cell5    cell6</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_df</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="n">table_df</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/output4.png" src="_images/output4.png" />
+</div>
+</div>
+<div class="section" id="charts">
+<h2>Charts<a class="headerlink" href="#charts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Template<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/template3.png" src="_images/template3.png" />
+</div>
+<div class="section" id="chart-from-dictionary">
+<h3>Chart from dictionary<a class="headerlink" href="#chart-from-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>In order to render a chart, you need to give a dictionary with three elements, the title, the data and the categories.
+The data is itself another dictionary, with the name of the series as the key and values of the series as the value.
+Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;chart&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;Cool Graph&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s1">&#39;displays&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">550</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="s1">&#39;clicks&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">275</span><span class="p">,</span> <span class="mi">125</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="p">},</span>
+<span class="gp">... </span>        <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;day1&#39;</span><span class="p">,</span> <span class="s1">&#39;day2&#39;</span><span class="p">,</span> <span class="s1">&#39;day3&#39;</span><span class="p">,</span> <span class="s1">&#39;day4&#39;</span><span class="p">,</span> <span class="s1">&#39;day5&#39;</span><span class="p">,</span> <span class="s1">&#39;day6&#39;</span><span class="p">,</span> <span class="s1">&#39;day7&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chart-from-pandas-dataframe">
+<h3>Chart from pandas DataFrame<a class="headerlink" href="#chart-from-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>You can also build a chart from a DataFrame, the column names will be used as the series names, the values as it values
+and the index as the categories, if you want to set the title, you should add the attribute <em>title</em> to the DataFrame.</p>
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">750</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">350</span><span class="p">,</span> <span class="mi">600</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">450</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">175</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">275</span><span class="p">,</span> <span class="mi">700</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">125</span><span class="p">,</span> <span class="mi">550</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd_chart</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day1&#39;</span><span class="p">,</span> <span class="s1">&#39;day2&#39;</span><span class="p">,</span> <span class="s1">&#39;day3&#39;</span><span class="p">,</span> <span class="s1">&#39;day4&#39;</span><span class="p">,</span> <span class="s1">&#39;day5&#39;</span><span class="p">,</span> <span class="s1">&#39;day6&#39;</span><span class="p">,</span> <span class="s1">&#39;day7&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;clicks&#39;</span><span class="p">,</span> <span class="s1">&#39;displays&#39;</span><span class="p">])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd_chart</span>
+<span class="go">  clicks  displays</span>
+<span class="go">0    250       500</span>
+<span class="go">1    150       750</span>
+<span class="go">2    350       600</span>
+<span class="go">3    300       500</span>
+<span class="go">4    175       500</span>
+<span class="go">5    275       700</span>
+<span class="go">6    125       550</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd_chart</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Cool Graph&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;chart&#39;</span><span class="p">:</span> <span class="n">pd_chart</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Output<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/output3.png" src="_images/output3.png" />
+</div>
+</div>
+<div class="section" id="putting-everything-together">
+<h2>Putting Everything Together<a class="headerlink" href="#putting-everything-together" title="Permalink to this headline">¶</a></h2>
+<p>In case you’re wondering, you don’t need to render one shape at the time. If you have a template like the previous
+one, you can render all the shapes with the following code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;slide_title&#39;</span><span class="p">:</span> <span class="s2">&quot;Cool insight&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;slide_text&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">2018</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;cpc_change&#39;</span><span class="p">:</span> <span class="mi">50</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span>    <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;header1&#39;</span><span class="p">,</span> <span class="s1">&#39;header2&#39;</span><span class="p">,</span> <span class="s1">&#39;header3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;cell1&#39;</span><span class="p">,</span> <span class="s1">&#39;cell2&#39;</span><span class="p">,</span> <span class="s1">&#39;cell3&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;cell4&#39;</span><span class="p">,</span> <span class="s1">&#39;cell5&#39;</span><span class="p">,</span> <span class="s1">&#39;cell6&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">]</span>
+<span class="gp">... </span>    <span class="s1">&#39;chart&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;Cool Graph&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>            <span class="s1">&#39;displays&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">550</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="s1">&#39;clicks&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">275</span><span class="p">,</span> <span class="mi">125</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="p">},</span>
+<span class="gp">... </span>        <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;day1&#39;</span><span class="p">,</span> <span class="s1">&#39;day2&#39;</span><span class="p">,</span> <span class="s1">&#39;day3&#39;</span><span class="p">,</span> <span class="s1">&#39;day4&#39;</span><span class="p">,</span> <span class="s1">&#39;day5&#39;</span><span class="p">,</span> <span class="s1">&#39;day6&#39;</span><span class="p">,</span> <span class="s1">&#39;day7&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User Reference</a><ul>
+<li><a class="reference internal" href="#paragraph">Paragraph</a><ul>
+<li><a class="reference internal" href="#template">Template</a></li>
+<li><a class="reference internal" href="#replace-full-text">Replace full text</a></li>
+<li><a class="reference internal" href="#replace-placeholders-within-the-text">Replace placeholders within the text</a></li>
+<li><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rendering-tables">Rendering Tables</a><ul>
+<li><a class="reference internal" href="#id1">Template</a></li>
+<li><a class="reference internal" href="#table-from-list">Table from list</a></li>
+<li><a class="reference internal" href="#table-from-pandas-dataframe-option-1">Table from pandas DataFrame (option 1)</a></li>
+<li><a class="reference internal" href="#table-from-pandas-dataframe-option-2">Table from pandas DataFrame (option 2)</a></li>
+<li><a class="reference internal" href="#id2">Output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#charts">Charts</a><ul>
+<li><a class="reference internal" href="#id3">Template</a></li>
+<li><a class="reference internal" href="#chart-from-dictionary">Chart from dictionary</a></li>
+<li><a class="reference internal" href="#chart-from-pandas-dataframe">Chart from pandas DataFrame</a></li>
+<li><a class="reference internal" href="#id4">Output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#putting-everything-together">Putting Everything Together</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to pypyt’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">API Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/use.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pypyt’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pypyt 0.0.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Julio Gajardo.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>
