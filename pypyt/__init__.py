@@ -435,5 +435,5 @@ def _(values: DataFrame, chart: Chart) -> None:
 def pypyt_doc():
     """Opens pypyt documentation in the browser."""
 
-    filepath = os.path.realpath('html_doc/index.html')
-    webbrowser.open(f'file:///{filepath}')
+    file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'html_docs/index.html')
+    webbrowser.open(f'file:///{file_path}')
