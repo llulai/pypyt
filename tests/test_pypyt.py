@@ -2,7 +2,7 @@ from collections import namedtuple
 from pytest import fixture, raises
 
 from pptx.presentation import Presentation
-from pypyt import open_ppt, get_shapes_by_name, render_chart
+from pypyt import open_template, get_shapes_by_name, render_chart
 import pandas as pd
 
 
@@ -71,7 +71,7 @@ def chart_values_df():
 
 
 def test_open():
-    assert isinstance(open_ppt('tests/__template__.pptx'), Presentation)
+    assert isinstance(open_template('tests/__template__.pptx'), Presentation)
 
 
 def test_get_one_shape(fake_presentation):
