@@ -34,7 +34,7 @@ This will render a presentation like the one below.
 
 ```python
 from pypyt import pypyt_doc
-    pypyt_doc()
+pypyt_doc()
 ```
 
 # Contact
