@@ -16,14 +16,14 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
 
 ![](images/template1.png)
 ```python
-    from pypyt import render_and_save_ppt
+from pypyt import render_and_save_ppt
 
-    values = {
-        'presentation_title': "This is a cool presentation",
-        'client_name': "Cool Client"
-    }
+values = {
+    'presentation_title': "This is a cool presentation",
+    'client_name': "Cool Client"
+}
 
-    render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
 ```
     
 This will render a presentation like the one below.
@@ -33,7 +33,7 @@ This will render a presentation like the one below.
 # Reference
 
 ```python
-    from pypyt import pypyt_doc
+from pypyt import pypyt_doc
     pypyt_doc()
 ```
 
