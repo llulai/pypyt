@@ -15,7 +15,7 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
 *client_name* (as shown in the image below), in order to render it you might use the following code:
 
 ![](images/template1.png)
-````python
+```python
     from pypyt import render_and_save_ppt
 
     values = {
@@ -24,7 +24,7 @@ Lets assume that you have a template file named \_\_template\_\_.pptx with two s
     }
 
     render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
-````
+```
     
 This will render a presentation like the one below.
 ![](images/output1.png)
@@ -32,10 +32,10 @@ This will render a presentation like the one below.
 
 # Reference
 
-````python
+```python
     from pypyt import pypyt_doc
     pypyt_doc()
-````
+```
 
 # Contact
 If you're trying to use this and want to extend it, have any request or need help, just ping me on slack (j.gajardo) or
