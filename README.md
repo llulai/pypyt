@@ -43,5 +43,5 @@ send me an email to j.gajardo@criteo.
 
 # Acknowledgments
 - **(New York) Sebastian Riera:** For finding bugs, suggest fixes and new features.
-- **(New York) Medhi Rifai:** For suggesting fixes to bugs.
+- **(New York) Mehdi Rifai:** For suggesting fixes to bugs.
 - **(Brazil) Caio Camilli:** For being the first user of the package and bring up possible points of improvement.
