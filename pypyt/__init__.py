@@ -14,7 +14,6 @@ from pptx.text.text import TextFrame
 from pandas import DataFrame
 
 
-
 # TEMPLATE FUNCTIONS
 
 def open_template(template_name: str) -> Presentation:
@@ -99,7 +98,33 @@ def render_and_save_template(template_name: str, values: dict, filename: str) ->
 
 # PRESENTATION FUNCTIONS
 
-def get_shapes(prs: Presentation) -> tuple:
+def _create_empty_values(shape):
+    if is_paragraph(shape):
+        placeholders = get_placeholders(shape.text_frame)
+
+        if placeholders:
+            return {keyword: '' for keyword in placeholders}
+        else:
+            return ''
+    elif is_table(shape):
+        return [[None for _ in row.cells] for row in shape.table.rows]
+
+    elif is_chart(shape):
+        return {'title': "", 'data': [], 'categories': []}
+
+
+def _is_default_name(name: str) -> bool:
+    _usual_default_words = {'Title', 'Placeholder', 'Connector', 'Elbow', 'Up', 'Left', 'Right', 'Down', 'Subtitle'}
+    if name.istitle():
+        if len(set(name.split()) & _usual_default_words) > 0:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+def get_shapes(prs: Presentation, get_all=False) -> dict:
     """
     Returns a tuple of tuples with the shape name and shape type.
 
@@ -108,10 +133,13 @@ def get_shapes(prs: Presentation) -> tuple:
     prs: pptx.presentation.Presentation
         Presentation to get the shapes from.
 
+    get_all: bool
+        If False, filters out the shapes that are believed to be created automatically
+
     Returns
     -------
-    tuple:
-        Tuple with the shapes.
+    dict:
+        Dictionary with the shape names as keys and an empty data structure to fill the values.
 
     Examples
     --------
@@ -120,18 +148,32 @@ def get_shapes(prs: Presentation) -> tuple:
 
     >>> prs = open_template('template.pptx')
     >>> get_shapes(prs)
-    (('client_name', 'paragraph'),
-     ('presentation_title', 'paragraph'),
-     ('slide_text', 'paragraph'),
-     ('slide_title', 'paragraph'),
-     ('chart', 'chart'),
-     ('Title 1', 'paragraph'),
-     ('table', 'table'),
-     ('Title 1', 'paragraph'))
+    {'chart': {'categories': [], 'data': [], 'title': ''},
+     'client_name': '',
+     'presentation_title': '',
+     'slide_text': {'cpc_change': '', 'year': ''},
+     'slide_title': '',
+     'table': [[None, None, None], [None, None, None], [None, None, None]]}
+
+    >>> get_shapes(prs, all=True)
+    {'Title 1': '',
+     'chart': {'categories': [], 'data': [], 'title': ''},
+     'client_name': '',
+     'presentation_title': '',
+     'slide_text': {'cpc_change': '', 'year': ''},
+     'slide_title': '',
+     'table': [[None, None, None], [None, None, None], [None, None, None]]}
     """
-    return tuple((shape.name, get_shape_type(shape))
-                 for slide in prs.slides
-                 for shape in slide.shapes)
+    if all:
+        return {shape.name: _create_empty_values(shape)
+                for slide in prs.slides
+                for shape in slide.shapes}
+
+    else:
+        return {shape.name: _create_empty_values(shape)
+                for slide in prs.slides
+                for shape in slide.shapes
+                if not _is_default_name(shape.name)}
 
 
 def get_shapes_by_name(prs: Presentation, name: str) -> list:
@@ -210,7 +252,7 @@ def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
 
     Parameters
     ----------
-    template_name: str
+    prs: Presentation
         Name of the presentation to be saved.
 
     values: dict
@@ -517,9 +559,10 @@ def render_paragraph(values, text_frame: TextFrame) -> None:
         if idx == 0:
             continue
         p.remove(run._r)  # pylint: disable=protected-access
-    else:
-        paragraph.text = 't'
-    paragraph.runs[0].text = values
+    try:
+        paragraph.runs[0].text = values
+    except IndexError:
+        paragraph.text = values
 
 
 @render_paragraph.register(dict)
@@ -536,6 +579,18 @@ def _(values: dict, text_frame: TextFrame) -> None:
                     continue
                 p.remove(run._r)  # pylint: disable=protected-access
             paragraph.runs[0].text = new_text
+
+
+def get_placeholders(text_frame: TextFrame) -> list:
+    placeholders = []
+
+    for paragraph in text_frame.paragraphs:
+        new_text_template = paragraph.text
+        keywords = re.findall(r"\{(\w+)\}", new_text_template)
+        if keywords:
+            placeholders.extend(keywords)
+
+    return placeholders
 
 
 @singledispatch
@@ -621,12 +676,12 @@ def _(values: DataFrame, table: Table) -> None:
     table_rows = iter(table.rows)
 
     if hasattr(values, 'header') and values.header:
-        for values_cell, table_cell in zip(list(values), next(table_rows)):
-            render_paragraph(values_cell, table_cell.text_frame)
+        for values_cell, table_cell in zip(list(values), next(table_rows).cells):
+            render_paragraph(str(values_cell), table_cell.text_frame)
 
     for values_row, table_row in zip(list(values.values), table_rows):
         for values_cell, table_cell in zip(list(values_row), table_row.cells):
-            render_paragraph(values_cell, table_cell.text_frame)
+            render_paragraph(str(values_cell), table_cell.text_frame)
 
 
 @render_table.register(list)
