@@ -1,4 +1,4 @@
-# pypyt 0.0.5
+# pypyt 0.0.6
 It is a simple library to render PowerPoint presentations using python
 
 # How to install it:
@@ -39,4 +39,9 @@ pypyt_doc()
 
 # Contact
 If you're trying to use this and want to extend it, have any request or need help, just ping me on slack (j.gajardo) or
-send me an email to j.gajardo@criteo.com
+send me an email to j.gajardo@criteo.
+
+# Acknowledgments
+- **(New York) Sebastian Riera:** For finding bugs, suggest fixes and new features.
+- **(New York) Medhi Rifai:** For suggesting fixes to bugs.
+- **(Brazil) Caio Camilli:** For being the first user of the package and bring up possible points of improvement.
