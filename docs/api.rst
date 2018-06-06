@@ -50,7 +50,7 @@ Documentation Functions:
 Template Functions
 ------------------
 
-.. autofunction:: open_template(template_name)
+.. autofunction:: pypyt.open_template(template_name)
 .. autofunction:: render_template(template_name, values)
 .. autofunction:: render_and_save_template(template_name, values, filename)
 
