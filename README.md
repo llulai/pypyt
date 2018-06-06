@@ -32,6 +32,11 @@ This will render a presentation like the one below.
 
 # Reference
 
+The documentation is available [online](https://pypyt.readthedocs.io/en/latest/index.html) and in
+[pdf](https://media.readthedocs.org/pdf/pypyt/latest/pypyt.pdf) through read the docs.
+
+Also, you can open it with the following command.
+
 ```python
 from pypyt import pypyt_doc
 pypyt_doc()
