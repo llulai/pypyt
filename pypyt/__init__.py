@@ -126,7 +126,7 @@ def _is_default_name(name: str) -> bool:
 
 def get_shapes(prs: Presentation, get_all=False) -> dict:
     """
-    Returns a tuple of tuples with the shape name and shape type.
+    Returns a dictionary to be filled with the values to be rendered in the presentation.
 
     Parameters
     ----------
@@ -697,7 +697,5 @@ def _(values: list, table: Table) -> None:
 # DOCUMENTATION FUNCTIONS
 
 def pypyt_doc():
-    """Opens pypyt documentation in the browser."""
-
-    file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'html_docs/index.html')
-    webbrowser.open(f'file:///{file_path}')
+    """Opens pypyt's documentation in the browser."""
+    webbrowser.open('https://pypyt.readthedocs.io/en/latest/index.html}')
