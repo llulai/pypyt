@@ -1,19 +1,34 @@
 .. _use:
 
-User Reference
+How-To Guides
 ==============
 
+- :ref:`paragraph`
+    - :ref:`replaceText`
+    - :ref:`replacePlaceholders`
+- :ref:`table`
+    - :ref:`tableList`
+    - :ref:`tableDFNoHeader`
+    - :ref:`tableDFHeader`
+- :ref:`chart`
+    - :ref:`chartDict`
+    - :ref:`chartDF`
+- :ref:`entirePresentation`
 
-Paragraph
----------
+
+.. _paragraph:
+
+How to render paragraphs
+------------------------
 
 Template
 ........
 .. image:: images/template2.png
 
+.. _replaceText:
 
-Replace full text
-.................
+How to replace the whole text of a paragraph
+............................................
 If you want to replace the whole text of the shape, you just need to define a dictionary, with the name of the
 shape as the key, and the text you want to render as the value.
 
@@ -26,8 +41,11 @@ Code::
     >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
-Replace placeholders within the text
-.....................................
+
+.. _replacePlaceholders:
+
+How to render placeholders within a paragraph
+.............................................
 If you want to render placeholders within the paragraph, the value of the dictionary has to be another
 dictionary, with the placeholders as keys, and the text to be replaced as values.
 
@@ -47,15 +65,20 @@ Output
 ......
 .. image:: images/output2.png
 
-Rendering Tables
-----------------
+.. _table:
+
+How to render a table
+---------------------
 
 Template
 ........
 .. image:: images/template4.png
 
-Table from list
-...............
+
+.. _tableList:
+
+How to render a table from a python list
+........................................
 In order to render a table, just pass the value of each cell as a list of lists.
 
 Code::
@@ -71,9 +94,10 @@ Code::
     >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
+.. _tableDFNoHeader:
 
-Table from pandas DataFrame (option 1)
-......................................
+How to render a table from a pandas DataFrame
+.............................................
 
 In the case you want to render the values of a DataFrame in the table, just pass the DataFrame instead of the
 list of lists.
@@ -98,9 +122,10 @@ Code::
     >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
+.. _tableDFHeader:
 
-Table from pandas DataFrame (option 2)
-......................................
+How to render a table from a pandas DataFrame using the header
+..............................................................
 
 If you want to use the DataFrame's column names as header, you should set the ``header`` attribute to ``True``
 
@@ -127,16 +152,20 @@ Output
 ......
 .. image:: images/output4.png
 
-Charts
-------
+.. _chart:
+
+How to render charts
+--------------------
 
 Template
 ........
 .. image:: images/template3.png
 
 
-Chart from dictionary
-.....................
+.. _chartDict:
+
+How to render a chart from a python dictionary
+..............................................
 In order to render a chart, you need to give a dictionary with three elements, the title, the data and the categories.
 The data is itself another dictionary, with the name of the series as the key and values of the series as the value.
 Code::
@@ -156,8 +185,10 @@ Code::
 
 
 
-Chart from pandas DataFrame
-...........................
+.. _chartDF:
+
+How to render a chart from a pandas DataFrame
+.............................................
 You can also build a chart from a DataFrame, the column names will be used as the series names, the values as it values
 and the index as the categories, if you want to set the title, you should add the attribute ``title`` to the DataFrame.
 
@@ -199,8 +230,10 @@ Output
 .. image:: images/output3.png
 
 
-Putting Everything Together
----------------------------
+.. _entirePresentation:
+
+How to render a whole presentation
+----------------------------------
 
 In case you're wondering, you don't need to render one shape at the time. If you have a template like the previous
 one, you can render all the shapes with the following code::
