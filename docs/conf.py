@@ -24,9 +24,9 @@ copyright = '2018, Julio Gajardo'
 author = 'Julio Gajardo'
 
 # The short X.Y version
-version = ''
+version = '0.0.6'
 # The full version, including alpha/beta/rc tags
-release = '0.0.5'
+release = '0.0.6'
 
 
 # -- General configuration ---------------------------------------------------
