@@ -44,9 +44,9 @@ pypyt_doc()
 
 # Contact
 If you're trying to use this and want to extend it, have any request or need help, just ping me on slack (j.gajardo) or
-send me an email to j.gajardo@criteo.
+send me an email to j.gajardo@criteo.com
 
 # Acknowledgments
-- **(New York) Sebastian Riera:** For finding bugs, suggest fixes and new features.
-- **(New York) Mehdi Rifai:** For suggesting fixes to bugs.
-- **(Brazil) Caio Camilli:** For being the first user of the package and bring up possible points of improvement.
+- **(Criteo - New York) Sebastian Riera:** For finding bugs, suggest fixes and new features.
+- **(Criteo - New York) Mehdi Rifai:** For suggesting fixes to bugs.
+- **(Criteo - Brazil) Caio Camilli:** For being the first user of the package and bring up possible points of improvement.
