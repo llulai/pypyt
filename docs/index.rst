@@ -7,9 +7,11 @@ Welcome to pypyt's documentation!
 =================================
 Pypyt is a library to render PowerPoint presentations from python in an easy and intuitive way.
 
+The code is open source, and available on `GitHub <https://github.com/llulai/pypyt>`_
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Documentation:
 
    tutorial
 

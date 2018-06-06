@@ -1,6 +1,6 @@
 .. _api:
 
-API Documentation
+Library Documentation
 =================
 
 .. module:: pypyt
