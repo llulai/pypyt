@@ -2,10 +2,9 @@
 It is a simple library to render PowerPoint presentations using python
 
 
-version | 0.0.8 
+version | [![PyPI version](https://badge.fury.io/py/pypyt.svg)](https://badge.fury.io/py/pypyt)
 --- | ---
 coverage | [![Coverage Status](https://coveralls.io/repos/github/llulai/pypyt/badge.svg?branch=master)](https://coveralls.io/github/llulai/pypyt?branch=master)
-
 # How to install it:
 
 
