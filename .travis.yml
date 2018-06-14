@@ -9,13 +9,3 @@ deploy:
     secure: "mHdh1FNOjPVxT4UkFOCbyE4fHjTLFdc53OspqRiWce67YeuvI+PzrOolkBvvrhQGm/LQpPzynNC+5Dp4frA6GRvfdgy7ki7X/YRLM6EzILNe6yRH1Kj6Yn0At4ZVe/ohTAzdXknsHpC1ItjpIwvHTSdVfdzsYEZubFTnLOywcAN7GTYYFiSLs4J0DqCE60IEhr8xjpwKTDyZzfekGrYjCl1M7cecMSDTmcHGtaPj6aLMqCPInnln9vJOhhx4iO2c+3fhRNTHZY1CFzzFXkrmtDvmnrYx/ULht5yOc5LGXBuTaWX7DtPUlW1RG2U3+LY9FwxFA7qELXBMH6XXJHY8206Q8YyowIE+99iUXYUVAsO5I9usF2vwqeEdRGK1VsOwt7S3qhzvB5Nrb5/DF5BC6FwlKcGgxMpIxs/y5+xn0iVrGPPmds69paAf5ts/8i9t+8Yr++d9nt0EVHXFP+goVw5uiqgmqv8JYPVgyRM0bekRsp069U65oKqmC5RYvEK1xJm+83O1budcyxItM3yiD/7bLuZ4yC6sJPJ4bGIFXsXL//QnacYxi/YN94UHwGJwVE+/iAXvp+cTrCe5Cvse/ogdn2SNsvP3M3sNN2kqYuNq9Zfn7kmEGErf7JpyjtUDa2QkbkoNX30e0GewvBc+OO+vM00GVUhdJBEya0w3MDg="
   on:
     branch: master
-
-install:
-    - pip install -r requirements.txt
-
-script:
-    - coverage run --source pypyt -m pytest
-    - coverage report -m
-
-after_success:
-    - coveralls
