@@ -1,7 +1,7 @@
 .. _api:
 
 Library Documentation
-=================
+=====================
 
 .. module:: pypyt
 

@@ -152,6 +152,43 @@ Output
 ......
 .. image:: images/output4.png
 
+
+.. _tablePlaceholders:
+
+How to render parts of a table using placeholders and a python dictionary
+.........................................................................
+
+If you want to render partially a table, for example with some KPI's values, you can use a python dictionary.
+
+Template
+........
+
+.. image:: images/template5.png
+
+
+Code::
+
+    >>> values = {
+    ...    'table': {
+    ...        'kpi1': "70%",
+    ...        'kpi2': "80%"
+    ...     }
+    ... }
+
+
+    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+
+
+
+
+
+Output
+......
+
+.. image:: images/output5.png
+
+
+
 .. _chart:
 
 How to render charts
@@ -229,6 +266,11 @@ Output
 ......
 .. image:: images/output3.png
 
+
+How to format a piechart to display percentages
+...............................................
+
+.. image:: images/format_chart.gif
 
 .. _entirePresentation:
 

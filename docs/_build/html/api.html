@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Documentation &mdash; pypyt 0.0.5 documentation</title>
+  <title>Library Documentation &mdash; pypyt 0.0.6 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="User Reference" href="use.html" /> 
+    <link rel="prev" title="How-To Guides" href="use.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -57,6 +57,10 @@
           
             
             
+              <div class="version">
+                0.0.6
+              </div>
+            
           
 
           
@@ -78,10 +82,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="use.html">User Reference</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use.html">How-To Guides</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Library Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#template-functions">Template Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#presentation-functions">Presentation Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shape-functions">Shape Functions</a></li>
@@ -134,7 +139,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>API Documentation</li>
+      <li>Library Documentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -154,7 +159,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-pypyt">
-<span id="api-documentation"></span><span id="api"></span><h1>API Documentation<a class="headerlink" href="#module-pypyt" title="Permalink to this headline">¶</a></h1>
+<span id="library-documentation"></span><span id="api"></span><h1>Library Documentation<a class="headerlink" href="#module-pypyt" title="Permalink to this headline">¶</a></h1>
 <p>For normal use, all you will have to do to get started is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypyt</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
@@ -280,16 +285,22 @@ values to be rendered, and filename.</p>
 <dl class="function">
 <dt id="pypyt.get_shapes">
 <code class="descclassname">pypyt.</code><code class="descname">get_shapes</code><span class="sig-paren">(</span><em>prs</em><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.get_shapes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a tuple of tuples with the shape name and shape type.</p>
+<dd><p>Returns a dictionary to be filled with the values to be rendered in the presentation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prs</strong> (<em>pptx.presentation.Presentation</em>) – Presentation to get the shapes from.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>prs</strong> (<em>pptx.presentation.Presentation</em>) – Presentation to get the shapes from.</li>
+<li><strong>get_all</strong> (<em>bool</em>) – If False, filters out the shapes that are believed to be created automatically</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Tuple with the shapes.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with the shape names as keys and an empty data structure to fill the values.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -297,14 +308,22 @@ values to be rendered, and filename.</p>
 <p>Get all the shapes in a presentation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prs</span> <span class="o">=</span> <span class="n">open_template</span><span class="p">(</span><span class="s1">&#39;template.pptx&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">get_shapes</span><span class="p">(</span><span class="n">prs</span><span class="p">)</span>
-<span class="go">((&#39;client_name&#39;, &#39;paragraph&#39;),</span>
-<span class="go"> (&#39;presentation_title&#39;, &#39;paragraph&#39;),</span>
-<span class="go"> (&#39;slide_text&#39;, &#39;paragraph&#39;),</span>
-<span class="go"> (&#39;slide_title&#39;, &#39;paragraph&#39;),</span>
-<span class="go"> (&#39;chart&#39;, &#39;chart&#39;),</span>
-<span class="go"> (&#39;Title 1&#39;, &#39;paragraph&#39;),</span>
-<span class="go"> (&#39;table&#39;, &#39;table&#39;),</span>
-<span class="go"> (&#39;Title 1&#39;, &#39;paragraph&#39;))</span>
+<span class="go">{&#39;chart&#39;: {&#39;categories&#39;: [], &#39;data&#39;: [], &#39;title&#39;: &#39;&#39;},</span>
+<span class="go"> &#39;client_name&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;presentation_title&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;slide_text&#39;: {&#39;cpc_change&#39;: &#39;&#39;, &#39;year&#39;: &#39;&#39;},</span>
+<span class="go"> &#39;slide_title&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;table&#39;: [[None, None, None], [None, None, None], [None, None, None]]}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_shapes</span><span class="p">(</span><span class="n">prs</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">{&#39;Title 1&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;chart&#39;: {&#39;categories&#39;: [], &#39;data&#39;: [], &#39;title&#39;: &#39;&#39;},</span>
+<span class="go"> &#39;client_name&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;presentation_title&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;slide_text&#39;: {&#39;cpc_change&#39;: &#39;&#39;, &#39;year&#39;: &#39;&#39;},</span>
+<span class="go"> &#39;slide_title&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;table&#39;: [[None, None, None], [None, None, None], [None, None, None]]}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -368,7 +387,7 @@ values to be rendered, and filename.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>template_name</strong> (<em>str</em>) – Name of the presentation to be saved.</li>
+<li><strong>prs</strong> (<em>Presentation</em>) – Name of the presentation to be saved.</li>
 <li><strong>values</strong> (<em>dict</em>) – Dictionary with the values to render on the template.</li>
 <li><strong>filename</strong> (<em>str</em>) – Name of the file to be saved.</li>
 </ul>
@@ -697,7 +716,7 @@ values to be rendered, and filename.</p>
 <dl class="function">
 <dt id="pypyt.pypyt_doc">
 <code class="descclassname">pypyt.</code><code class="descname">pypyt_doc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pypyt.pypyt_doc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opens pypyt documentation in the browser.</p>
+<dd><p>Opens pypyt’s documentation in the browser.</p>
 </dd></dl>
 
 </div>
@@ -712,7 +731,7 @@ values to be rendered, and filename.</p>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="use.html" class="btn btn-neutral" title="User Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="use.html" class="btn btn-neutral" title="How-To Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -743,7 +762,7 @@ values to be rendered, and filename.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.5',
+            VERSION:'0.0.6',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

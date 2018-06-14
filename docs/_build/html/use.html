@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Reference &mdash; pypyt 0.0.5 documentation</title>
+  <title>How-To Guides &mdash; pypyt 0.0.6 documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Documentation" href="api.html" />
-    <link rel="prev" title="Welcome to pypyt’s documentation!" href="index.html" /> 
+    <link rel="next" title="Library Documentation" href="api.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -58,6 +58,10 @@
           
             
             
+              <div class="version">
+                0.0.6
+              </div>
+            
           
 
           
@@ -79,35 +83,40 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#paragraph">Paragraph</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-To Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-render-paragraphs">How to render paragraphs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#template">Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#replace-full-text">Replace full text</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#replace-placeholders-within-the-text">Replace placeholders within the text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-replace-the-whole-text-of-a-paragraph">How to replace the whole text of a paragraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-placeholders-within-a-paragraph">How to render placeholders within a paragraph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#rendering-tables">Rendering Tables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-render-a-table">How to render a table</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#table-from-list">Table from list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#table-from-pandas-dataframe-option-1">Table from pandas DataFrame (option 1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#table-from-pandas-dataframe-option-2">Table from pandas DataFrame (option 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-a-table-from-a-python-list">How to render a table from a python list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-a-table-from-a-pandas-dataframe">How to render a table from a pandas DataFrame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-a-table-from-a-pandas-dataframe-using-the-header">How to render a table from a pandas DataFrame using the header</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Output</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#charts">Charts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-parts-of-a-table-using-placeholders-and-a-python-dictionary">How to render parts of a table using placeholders and a python dictionary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#chart-from-dictionary">Chart from dictionary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#chart-from-pandas-dataframe">Chart from pandas DataFrame</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Output</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#putting-everything-together">Putting Everything Together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-render-charts">How to render charts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-a-chart-from-a-python-dictionary">How to render a chart from a python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-render-a-chart-from-a-pandas-dataframe">How to render a chart from a pandas DataFrame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-format-a-piechart-to-display-percentages">How to format a piechart to display percentages</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-render-a-whole-presentation">How to render a whole presentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Library Documentation</a></li>
 </ul>
 
             
@@ -153,7 +162,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>User Reference</li>
+      <li>How-To Guides</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,16 +181,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="user-reference">
-<span id="use"></span><h1>User Reference<a class="headerlink" href="#user-reference" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="paragraph">
-<h2>Paragraph<a class="headerlink" href="#paragraph" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="how-to-guides">
+<span id="use"></span><h1>How-To Guides<a class="headerlink" href="#how-to-guides" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#paragraph"><span class="std std-ref">How to render paragraphs</span></a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#replacetext"><span class="std std-ref">How to replace the whole text of a paragraph</span></a></li>
+<li><a class="reference internal" href="#replaceplaceholders"><span class="std std-ref">How to render placeholders within a paragraph</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#table"><span class="std std-ref">How to render a table</span></a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#tablelist"><span class="std std-ref">How to render a table from a python list</span></a></li>
+<li><a class="reference internal" href="#tabledfnoheader"><span class="std std-ref">How to render a table from a pandas DataFrame</span></a></li>
+<li><a class="reference internal" href="#tabledfheader"><span class="std std-ref">How to render a table from a pandas DataFrame using the header</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#chart"><span class="std std-ref">How to render charts</span></a></dt>
+<dd><ul class="first last">
+<li><a class="reference internal" href="#chartdict"><span class="std std-ref">How to render a chart from a python dictionary</span></a></li>
+<li><a class="reference internal" href="#chartdf"><span class="std std-ref">How to render a chart from a pandas DataFrame</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><a class="reference internal" href="#entirepresentation"><span class="std std-ref">How to render a whole presentation</span></a></li>
+</ul>
+<div class="section" id="how-to-render-paragraphs">
+<span id="paragraph"></span><h2>How to render paragraphs<a class="headerlink" href="#how-to-render-paragraphs" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="template">
 <h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/template2.png" src="_images/template2.png" />
 </div>
-<div class="section" id="replace-full-text">
-<h3>Replace full text<a class="headerlink" href="#replace-full-text" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-replace-the-whole-text-of-a-paragraph">
+<span id="replacetext"></span><h3>How to replace the whole text of a paragraph<a class="headerlink" href="#how-to-replace-the-whole-text-of-a-paragraph" title="Permalink to this headline">¶</a></h3>
 <p>If you want to replace the whole text of the shape, you just need to define a dictionary, with the name of the
 shape as the key, and the text you want to render as the value.</p>
 <p>Code:</p>
@@ -193,8 +233,8 @@ shape as the key, and the text you want to render as the value.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="replace-placeholders-within-the-text">
-<h3>Replace placeholders within the text<a class="headerlink" href="#replace-placeholders-within-the-text" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-render-placeholders-within-a-paragraph">
+<span id="replaceplaceholders"></span><h3>How to render placeholders within a paragraph<a class="headerlink" href="#how-to-render-placeholders-within-a-paragraph" title="Permalink to this headline">¶</a></h3>
 <p>If you want to render placeholders within the paragraph, the value of the dictionary has to be another
 dictionary, with the placeholders as keys, and the text to be replaced as values.</p>
 <p>Code:</p>
@@ -214,14 +254,14 @@ dictionary, with the placeholders as keys, and the text to be replaced as values
 <img alt="_images/output2.png" src="_images/output2.png" />
 </div>
 </div>
-<div class="section" id="rendering-tables">
-<h2>Rendering Tables<a class="headerlink" href="#rendering-tables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-render-a-table">
+<span id="table"></span><h2>How to render a table<a class="headerlink" href="#how-to-render-a-table" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>Template<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/template4.png" src="_images/template4.png" />
 </div>
-<div class="section" id="table-from-list">
-<h3>Table from list<a class="headerlink" href="#table-from-list" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-render-a-table-from-a-python-list">
+<span id="tablelist"></span><h3>How to render a table from a python list<a class="headerlink" href="#how-to-render-a-table-from-a-python-list" title="Permalink to this headline">¶</a></h3>
 <p>In order to render a table, just pass the value of each cell as a list of lists.</p>
 <p>Code:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
@@ -236,8 +276,8 @@ dictionary, with the placeholders as keys, and the text to be replaced as values
 </pre></div>
 </div>
 </div>
-<div class="section" id="table-from-pandas-dataframe-option-1">
-<h3>Table from pandas DataFrame (option 1)<a class="headerlink" href="#table-from-pandas-dataframe-option-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-render-a-table-from-a-pandas-dataframe">
+<span id="tabledfnoheader"></span><h3>How to render a table from a pandas DataFrame<a class="headerlink" href="#how-to-render-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
 <p>In the case you want to render the values of a DataFrame in the table, just pass the DataFrame instead of the
 list of lists.</p>
 <p>Code:</p>
@@ -260,8 +300,8 @@ list of lists.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="table-from-pandas-dataframe-option-2">
-<h3>Table from pandas DataFrame (option 2)<a class="headerlink" href="#table-from-pandas-dataframe-option-2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-render-a-table-from-a-pandas-dataframe-using-the-header">
+<span id="tabledfheader"></span><h3>How to render a table from a pandas DataFrame using the header<a class="headerlink" href="#how-to-render-a-table-from-a-pandas-dataframe-using-the-header" title="Permalink to this headline">¶</a></h3>
 <p>If you want to use the DataFrame’s column names as header, you should set the <code class="docutils literal notranslate"><span class="pre">header</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 <p>Code:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
@@ -286,15 +326,39 @@ list of lists.</p>
 <h3>Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/output4.png" src="_images/output4.png" />
 </div>
+<div class="section" id="how-to-render-parts-of-a-table-using-placeholders-and-a-python-dictionary">
+<span id="tableplaceholders"></span><h3>How to render parts of a table using placeholders and a python dictionary<a class="headerlink" href="#how-to-render-parts-of-a-table-using-placeholders-and-a-python-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>If you want to render partially a table, for example with some KPI’s values, you can use a python dictionary.</p>
 </div>
-<div class="section" id="charts">
-<h2>Charts<a class="headerlink" href="#charts" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
 <h3>Template<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/template5.png" src="_images/template5.png" />
+<p>Code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>   <span class="s1">&#39;table&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>       <span class="s1">&#39;kpi1&#39;</span><span class="p">:</span> <span class="s2">&quot;70%&quot;</span><span class="p">,</span>
+<span class="gp">... </span>       <span class="s1">&#39;kpi2&#39;</span><span class="p">:</span> <span class="s2">&quot;80%&quot;</span>
+<span class="gp">... </span>    <span class="p">}</span>
+<span class="gp">... </span><span class="p">}</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">render_and_save_ppt</span><span class="p">(</span><span class="s1">&#39;__template__.pptx&#39;</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="s1">&#39;rendered_ppt.pptx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Output<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/output5.png" src="_images/output5.png" />
+</div>
+</div>
+<div class="section" id="how-to-render-charts">
+<span id="chart"></span><h2>How to render charts<a class="headerlink" href="#how-to-render-charts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>Template<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/template3.png" src="_images/template3.png" />
 </div>
-<div class="section" id="chart-from-dictionary">
-<h3>Chart from dictionary<a class="headerlink" href="#chart-from-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-render-a-chart-from-a-python-dictionary">
+<span id="chartdict"></span><h3>How to render a chart from a python dictionary<a class="headerlink" href="#how-to-render-a-chart-from-a-python-dictionary" title="Permalink to this headline">¶</a></h3>
 <p>In order to render a chart, you need to give a dictionary with three elements, the title, the data and the categories.
 The data is itself another dictionary, with the name of the series as the key and values of the series as the value.
 Code:</p>
@@ -313,8 +377,8 @@ Code:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="chart-from-pandas-dataframe">
-<h3>Chart from pandas DataFrame<a class="headerlink" href="#chart-from-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-to-render-a-chart-from-a-pandas-dataframe">
+<span id="chartdf"></span><h3>How to render a chart from a pandas DataFrame<a class="headerlink" href="#how-to-render-a-chart-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
 <p>You can also build a chart from a DataFrame, the column names will be used as the series names, the values as it values
 and the index as the categories, if you want to set the title, you should add the attribute <code class="docutils literal notranslate"><span class="pre">title</span></code> to the DataFrame.</p>
 <p>Code:</p>
@@ -350,13 +414,17 @@ and the index as the categories, if you want to set the title, you should add th
 </pre></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Output<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Output<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <img alt="_images/output3.png" src="_images/output3.png" />
 </div>
+<div class="section" id="how-to-format-a-piechart-to-display-percentages">
+<h3>How to format a piechart to display percentages<a class="headerlink" href="#how-to-format-a-piechart-to-display-percentages" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/format_chart.gif" src="_images/format_chart.gif" />
 </div>
-<div class="section" id="putting-everything-together">
-<h2>Putting Everything Together<a class="headerlink" href="#putting-everything-together" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="how-to-render-a-whole-presentation">
+<span id="entirepresentation"></span><h2>How to render a whole presentation<a class="headerlink" href="#how-to-render-a-whole-presentation" title="Permalink to this headline">¶</a></h2>
 <p>In case you’re wondering, you don’t need to render one shape at the time. If you have a template like the previous
 one, you can render all the shapes with the following code:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span>
@@ -394,10 +462,10 @@ one, you can render all the shapes with the following code:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Library Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to pypyt’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -428,7 +496,7 @@ one, you can render all the shapes with the following code:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.5',
+            VERSION:'0.0.6',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
