@@ -4,6 +4,7 @@ python:
 
 script:
   - touch foo
+  - rm foo
 
 deploy:
   provider: pypi
