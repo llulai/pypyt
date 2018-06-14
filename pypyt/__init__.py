@@ -234,13 +234,16 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
         # gets all the instances of the item in the presentation
         for shape in get_shapes_by_name(prs, key):
 
-            # depending on what kind of item it is, it renders it
-            if is_table(shape):
-                render_table(value, shape.table)
-            elif is_paragraph(shape):
-                render_paragraph(value, shape.text_frame)
-            elif is_chart(shape):
-                render_chart(value, shape.chart)
+            try:
+                # depending on what kind of item it is, it renders it
+                if is_table(shape):
+                    render_table(value, shape.table)
+                elif is_paragraph(shape):
+                    render_paragraph(value, shape.text_frame)
+                elif is_chart(shape):
+                    render_chart(value, shape.chart)
+            except:
+                print("Failed to render {type} object with key {key}".format(type=get_shape_type(shape), key=key))
 
     return prs
 
@@ -572,7 +575,9 @@ def _(values: dict, text_frame: TextFrame) -> None:
         new_text_template = paragraph.text
         keywords = re.findall(r"\{(\w+)\}", new_text_template)
         if keywords:
+            print(keywords)
             new_text = new_text_template.format(**{k: values[k] for k in keywords})
+            print(new_text)
             p = paragraph._p  # pylint: disable=protected-access,invalid-name
             for idx, run in enumerate(paragraph.runs):
                 if idx == 0:
