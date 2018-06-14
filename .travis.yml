@@ -2,9 +2,16 @@ language: python
 python:
     - "3.6"
 
+install:
+    - pip install -r requirements.txt
+
 script:
-  - touch foo
-  - rm foo
+    - pylint pypyt
+    - coverage run --source pypyt -m pytest
+    - coverage report -m
+
+after_success:
+    - coveralls
 
 deploy:
   provider: pypi

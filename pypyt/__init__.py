@@ -98,30 +98,37 @@ def render_and_save_template(template_name: str, values: dict, filename: str) ->
 
 # PRESENTATION FUNCTIONS
 
-def _create_empty_values(shape):
+def _create_empty_values(shape) -> Union[str, list, dict]:
     if is_paragraph(shape):
-        placeholders = get_placeholders(shape.text_frame)
+        placeholders = _get_placeholders(shape.text_frame)
 
         if placeholders:
             return {keyword: '' for keyword in placeholders}
-        else:
-            return ''
+        return ''
     elif is_table(shape):
         return [[None for _ in row.cells] for row in shape.table.rows]
 
     elif is_chart(shape):
         return {'title': "", 'data': [], 'categories': []}
+    else:
+        return ''
 
 
 def _is_default_name(name: str) -> bool:
-    _usual_default_words = {'Title', 'Placeholder', 'Connector', 'Elbow', 'Up', 'Left', 'Right', 'Down', 'Subtitle'}
+    _usual_default_words = {
+        'Title',
+        'Placeholder',
+        'Connector',
+        'Elbow', 'Up',
+        'Left',
+        'Right',
+        'Down',
+        'Subtitle'
+    }
+
     if name.istitle():
-        if len(set(name.split()) & _usual_default_words) > 0:
-            return True
-        else:
-            return False
-    else:
-        return False
+        return (set(name.split()) & _usual_default_words) == {}
+    return False
 
 
 def get_shapes(prs: Presentation, get_all=False) -> dict:
@@ -164,16 +171,15 @@ def get_shapes(prs: Presentation, get_all=False) -> dict:
      'slide_title': '',
      'table': [[None, None, None], [None, None, None], [None, None, None]]}
     """
-    if all:
+    if get_all:
         return {shape.name: _create_empty_values(shape)
                 for slide in prs.slides
                 for shape in slide.shapes}
 
-    else:
-        return {shape.name: _create_empty_values(shape)
-                for slide in prs.slides
-                for shape in slide.shapes
-                if not _is_default_name(shape.name)}
+    return {shape.name: _create_empty_values(shape)
+            for slide in prs.slides
+            for shape in slide.shapes
+            if not _is_default_name(shape.name)}
 
 
 def get_shapes_by_name(prs: Presentation, name: str) -> list:
@@ -242,8 +248,8 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
                     render_paragraph(value, shape.text_frame)
                 elif is_chart(shape):
                     render_chart(value, shape.chart)
-            except:
-                print("Failed to render {type} object with key {key}".format(type=get_shape_type(shape), key=key))
+            except:  # pylint: disable=bare-except
+                print(f"Failed to render {get_shape_type(shape)} object with key {key}")
 
     return prs
 
@@ -586,7 +592,7 @@ def _(values: dict, text_frame: TextFrame) -> None:
             paragraph.runs[0].text = new_text
 
 
-def get_placeholders(text_frame: TextFrame) -> list:
+def _get_placeholders(text_frame: TextFrame) -> list:
     placeholders = []
 
     for paragraph in text_frame.paragraphs:
@@ -677,7 +683,6 @@ def _(values: dict, table: Table) -> None:
 
 @render_table.register(DataFrame)
 def _(values: DataFrame, table: Table) -> None:
-    # TODO: raise error if size(values) != size(table)
     table_rows = iter(table.rows)
 
     if hasattr(values, 'header') and values.header:
@@ -693,7 +698,6 @@ def _(values: DataFrame, table: Table) -> None:
 def _(values: list, table: Table) -> None:
     """In the case you want to replace the whole table,
     it will set the value for each cell in the list"""
-    # TODO: raise error if size(values) != size(table)
     for values_row, table_row in zip(values, table.rows):
         for values_cell, table_cell in zip(values_row, table_row.cells):
             render_paragraph(values_cell, table_cell.text_frame)
