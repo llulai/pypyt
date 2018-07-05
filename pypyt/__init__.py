@@ -240,16 +240,16 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
         # gets all the instances of the item in the presentation
         for shape in get_shapes_by_name(prs, key):
 
-        try:
-            # depending on what kind of item it is, it renders it
-            if is_table(shape):
-                render_table(value, shape.table)
-            elif is_paragraph(shape):
-                render_paragraph(value, shape.text_frame)
-            elif is_chart(shape):
-                render_chart(value, shape.chart)
-        except:  # pylint: disable=bare-except
-            print(f"Failed to render {get_shape_type(shape)} object with key {key}")
+            try:
+                # depending on what kind of item it is, it renders it
+                if is_table(shape):
+                    render_table(value, shape.table)
+                elif is_paragraph(shape):
+                    render_paragraph(value, shape.text_frame)
+                elif is_chart(shape):
+                    render_chart(value, shape.chart)
+            except:  # pylint: disable=bare-except
+                print(f"Failed to render {get_shape_type(shape)} object with key {key}")
 
     return prs
 
