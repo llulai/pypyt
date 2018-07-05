@@ -1,7 +1,0 @@
-pypyt
-=====
-
-.. toctree::
-   :maxdepth: 4
-
-   pypyt

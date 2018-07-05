@@ -47,7 +47,8 @@ Code::
 How to render placeholders within a paragraph
 .............................................
 If you want to render placeholders within the paragraph, the value of the dictionary has to be another
-dictionary, with the placeholders as keys, and the text to be replaced as values.
+dictionary, with the placeholders as keys, and the text to be replaced as values. **The placeholder name has to be
+a valid python variable name**.
 
 Code::
 
