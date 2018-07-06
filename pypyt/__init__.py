@@ -705,4 +705,4 @@ def _(values: list, table: Table) -> None:
 
 def pypyt_doc():
     """Opens pypyt's documentation in the browser."""
-    webbrowser.open('https://pypyt.readthedocs.io/en/latest/index.html}')
+    webbrowser.open('https://pypyt.readthedocs.io/en/latest/index.html')
