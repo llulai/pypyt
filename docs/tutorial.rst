@@ -3,6 +3,18 @@
 Tutorial
 --------
 
+How to install it
+.................
+
+To install it, you just need to run the `pip` command::
+
+    pip install pypyt
+
+
+How to render content
+.....................
+
+
 First of all, you need to create a template file with the objects names as shown in
 `this video <https://www.youtube.com/watch?v=IhES3of_9Nw>`_
 
