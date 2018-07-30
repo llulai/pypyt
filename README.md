@@ -1,5 +1,5 @@
 # pypyt
-It is a simple library to render PowerPoint presentations using python
+pypyt (pronounced **pie pie tee**, not pee wide pee wide tee), is a simple library to render PowerPoint presentations using python
 
 
 version |coverage 
