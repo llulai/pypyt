@@ -9,7 +9,7 @@ from pptx import Presentation
 from pptx.chart.chart import Chart
 from pptx.chart.data import CategoryChartData
 from pptx.shapes.base import BaseShape
-from pptx.shapes.table import Table
+from pptx.table import Table
 from pptx.text.text import TextFrame
 from pandas import DataFrame
 
