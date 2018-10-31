@@ -10,11 +10,11 @@ FakePresentation = namedtuple('Presentation', 'slides')
 FakeSlide = namedtuple('Slide', 'shapes')
 FakeShape = namedtuple('Shape', 'name')
 
+
 class Dummy:
     text_frame = None
     categories = None
     series = None
-
 
 
 class FakeChart:
@@ -113,7 +113,7 @@ def test_chart_same_output_title(chart_values_dict, chart_values_df):
 
 
 def test_chart_invalid_values():
-    chart_invalid_data  = [1, 2, 3]
+    chart_invalid_data = [1, 2, 3]
 
     with raises(NotImplementedError):
         render_chart(chart_invalid_data, FakeChart())
