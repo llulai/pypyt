@@ -185,6 +185,7 @@ def get_shapes(prs: Presentation, get_all=False) -> dict:
 def get_shapes_by_name(prs: Presentation, name: str) -> list:
     """
     Returns a list of shapes with the given name in the given presentation.
+
     Parameters
     ----------
     prs: pptx.presentation.Presentation
