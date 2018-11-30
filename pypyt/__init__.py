@@ -591,6 +591,18 @@ def _(values: dict, text_frame: TextFrame) -> None:
             paragraph.runs[0].text = new_text
 
 
+@render_paragraph.register(int)
+def _(values: int, text_frame: TextFrame) -> None:
+    """In case the values of the paragraph is not a text"""
+    render_paragraph(str(values), text_frame)
+
+
+@render_paragraph.register(float)
+def _(values: int, text_frame: TextFrame) -> None:
+    """In case the values of the paragraph is not a text"""
+    render_paragraph(str(values), text_frame)
+
+
 def _get_placeholders(text_frame: TextFrame) -> list:
     placeholders = []
 
