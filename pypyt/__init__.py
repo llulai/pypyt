@@ -1,7 +1,5 @@
 """Renders PowerPoint presentations easily with Python"""
-
 import re
-import os
 import webbrowser
 from functools import singledispatch
 from typing import Union
@@ -127,7 +125,7 @@ def _is_default_name(name: str) -> bool:
     }
 
     if name.istitle():
-        return (set(name.split()) & _usual_default_words) == {}
+        return (set(name.split()) & _usual_default_words) != {}
     return False
 
 
