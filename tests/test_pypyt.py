@@ -3,7 +3,12 @@ import pandas as pd
 
 from pytest import fixture, raises
 from pptx.presentation import Presentation
-from pypyt import get_shape_type, get_shapes, open_template, get_shapes_by_name, render_chart
+from pypyt import get_shape_type, \
+    get_shapes, \
+    open_template, \
+    get_shapes_by_name, \
+    render_chart, \
+    render_paragraph, render_table, render_ppt
 
 
 class FakePresentation:  # pylint: disable=too-few-public-methods
@@ -31,6 +36,8 @@ class FakeParagraph:  # pylint: disable=too-few-public-methods
     """fake class to test paragraphs"""
     def __init__(self, text: str):
         self.text = text
+        self.runs = [self]
+        self._p = None
 
     def __eq__(self, other):
         return self.text == other.text
@@ -42,8 +49,8 @@ class FakeTextFrame:  # pylint: disable=too-few-public-methods
         self.paragraphs = paragraphs
 
     def __eq__(self, other):
-        if len(self.paragraphs) == len(other.pargraphs):
-            for par1, par2 in zip(sorted(self.paragraphs), sorted(other.pargraphs)):
+        if len(self.paragraphs) == len(other.paragraphs):
+            for par1, par2 in zip(sorted(self.paragraphs), sorted(other.paragraphs)):
                 if par1 != par2:
                     return False
         else:
@@ -62,10 +69,18 @@ class FakeParagraphShape(FakeShape):  # pylint: disable=too-few-public-methods
         return self.name == other.name and self.text_frame == other.text_frame
 
 
+class FakeCell:
+    def __init__(self, val):
+        self.text_frame = FakeTextFrame([FakeParagraph(val)])
+
+    def __eq__(self, other):
+        return self.text_frame == other.text_frame
+
+
 class FakeRows:  # pylint: disable=too-few-public-methods
     """fake class to test rows"""
     def __init__(self, cells: list):
-        self.cells = cells
+        self.cells = [FakeCell(cell) for cell in cells]
 
     def __eq__(self, other):
         return all(el1 == el2 for el1, el2 in zip(self.cells, other.cells))\
@@ -109,6 +124,7 @@ class FakeChart(FakeShape):  # pylint: disable=too-few-public-methods
         self.chart_title.text_frame = Dummy()
         self.chart_title.text_frame.text = None
         self.has_chart = True
+        self.chart = self
 
     def __eq__(self, other):
         return (self.chart_data.categories == other.chart_data.categories
@@ -163,6 +179,18 @@ def fake_paragraph():
 def fake_table():
     """fake table instance for tests"""
     return FakeTableShape('shape_table', [[1, 2, 3], [4, 5, 6]])
+
+
+@fixture
+def table_values_list():
+    """fake table values list"""
+    return [[1, 2, 3], [4, 5, 6]]
+
+
+@fixture
+def table_values_df():
+    """fake table values dataframe"""
+    return pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
 
 @fixture
@@ -282,3 +310,63 @@ def test_chart_invalid_values():
 
     with raises(NotImplementedError):
         render_chart(chart_invalid_data, FakeChart('shape_chart'))
+
+
+def test_render_paragraph(fake_paragraph):  # pylint: disable=redefined-outer-name
+    """render string paragraph"""
+    values = 'rendered text'
+    render_paragraph(values, fake_paragraph.text_frame)
+
+    rendered_paragraph = FakeParagraphShape('shape_paragraph',
+                                            FakeTextFrame([FakeParagraph('rendered text')]))
+
+    assert fake_paragraph == rendered_paragraph
+
+
+def test_render_paragraph_placeholder(fake_paragraph_placeholder):  # pylint: disable=redefined-outer-name,invalid-name
+    """test render dict paragraph"""
+    values = {
+        'place': 'rendered text'
+    }
+    render_paragraph(values, fake_paragraph_placeholder.text_frame)
+
+    rendered_paragraph = FakeParagraphShape('shape_paragraph_placeholder',
+                                            FakeTextFrame([FakeParagraph('one rendered text')]))
+
+    assert fake_paragraph_placeholder == rendered_paragraph
+
+
+def test_render_table(table_values_list, table_values_df):
+    """test render table"""
+
+    fake_table_list = FakeTableShape('fake_table', [[None, None, None], [None, None, None]])
+    fake_table_df = FakeTableShape('fake_table', [[None, None, None], [None, None, None]])
+
+    render_table(table_values_list, fake_table_list.table)
+    render_table(table_values_df, fake_table_df.table)
+
+    assert fake_table_df == fake_table_list
+
+
+def test_render_ppt(fake_presentation):
+
+    values_1 = {
+        'shape_paragraph_placeholder': {
+            'place': 'holder'
+        },
+        'shape_table': [
+            ['a', 'b', 'c'],
+            ['d', 'e', 'f']
+        ],
+        'shape_chart': {
+            'title': 'titulo',
+            'categories': ['d1', 'd2', 'd3', 'd4'],
+            'data': {
+                'clicks': [125, 300, 250, 200],
+                'displays': [500, 450, 600, 400],
+        }
+    }
+    }
+
+    render_ppt(fake_presentation, values_1)
+    assert True
