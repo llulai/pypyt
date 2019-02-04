@@ -34,12 +34,14 @@ Shape Functions:
 * The :func:`is_chart` function returns ``True`` if the given shape is a chart.
 * The :func:`is_paragraph` function returns ``True`` if the given shape is a paragraph.
 * The :func:`is_table` function returns ``True`` if the given shape is a table.
+* The :func:`is_picture` function returns ``True`` if the given shape is a picture.
 
 Render Functions:
 
 * The :func:`render_chart` function renders a chart object.
 * The :func:`render_paragraph` function renders a paragraph object.
 * The :func:`render_table` function renders a table object.
+* The :func:`render_picture` function renders a picture object.
 
 
 Documentation Functions:
@@ -72,6 +74,7 @@ Shape Functions
 .. autofunction:: is_chart(shape)
 .. autofunction:: is_paragraph(shape)
 .. autofunction:: is_table(shape)
+.. autofunction:: is_picture(shape)
 
 
 Render Functions
@@ -80,6 +83,7 @@ Render Functions
 .. autofunction:: render_chart(values, chart)
 .. autofunction:: render_paragraph(values, text_frame)
 .. autofunction:: render_table(values, table)
+.. autofunction:: render_picture(values, table)
 
 
 Documentation Functions

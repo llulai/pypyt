@@ -1,5 +1,6 @@
 """Renders PowerPoint presentations easily with Python"""
 import re
+import io
 import webbrowser
 from functools import singledispatch
 from typing import Union
@@ -7,6 +8,7 @@ from pptx import Presentation
 from pptx.chart.chart import Chart
 from pptx.chart.data import CategoryChartData
 from pptx.shapes.base import BaseShape
+from pptx.shapes.picture import Picture
 from pptx.table import Table
 from pptx.text.text import TextFrame
 from pandas import DataFrame
@@ -246,6 +248,8 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
                 render_paragraph(value, shape.text_frame)
             elif is_chart(shape):
                 render_chart(value, shape.chart)
+            elif is_picture(shape):
+                render_picture(value, shape)
             #except:  # pylint: disable=bare-except
             #    print(f"Failed to render {get_shape_type(shape)} object with key {key}")
 
@@ -338,6 +342,8 @@ def get_shape_type(shape: BaseShape) -> str:
         return 'table'
     elif is_chart(shape):
         return 'chart'
+    elif is_picture(shape):
+        return 'image'
     return ''
 
 
@@ -420,6 +426,33 @@ def is_table(shape: BaseShape) -> bool:
     False
     """
     return shape.has_table
+
+
+def is_picture(shape: BaseShape) -> bool:
+    """
+        Checks whether the given shape is a picture.
+
+        Parameters
+        ----------
+        shape: pptx.shapes.base.BaseShape
+            Shape to get whether is a picture or not.
+
+        Returns
+        -------
+        bool:
+            Boolean representing whether the given shape is a picture or not.
+
+        Examples
+        --------
+
+        Check whether the given shape is a picture.
+
+        >>> prs = open_template('template.pptx')
+        >>> shapes = get_shapes_by_name(prs, 'client_name')
+        >>> is_picture(shapes[0])
+        False
+        """
+    return isinstance(shape, Picture)
 
 
 # RENDER FUNCTIONS
@@ -710,6 +743,45 @@ def _(values: list, table: Table) -> None:
     for values_row, table_row in zip(values, table.rows):
         for values_cell, table_cell in zip(values_row, table_row.cells):
             render_paragraph(values_cell, table_cell.text_frame)
+
+
+def render_picture(values: Union[str, io.BytesIO], image: Picture) -> None:
+    """
+    Renders an image with the given values.
+
+    Parameters
+    ----------
+    values: string (filename) or file-like object
+        Reference to the image
+
+    image: pptx.shapes.picture.Picture
+        Shape where to render the image
+
+    Examples
+    --------
+
+    Render image from image filename
+
+    >>> prs = open_template('template.pptx')
+    >>> picture: 'image_file.jpg'
+    >>> shapes = get_shapes_by_name(prs, 'image')
+    >>> shape = shapes[0]
+    >>> render_picture(picture, shape)
+
+
+    Render image from file-like object
+
+    >>> import io
+    >>> prs = open_template('template.pptx')
+    >>> with open('image_file.jpg', 'br') as file:
+    >>>    picture = io.BytesIO(file.read())
+    >>> shapes = get_shapes_by_name(prs, 'image')
+    >>> shape = shapes[0]
+    >>> render_picture(picture, shape)
+    """
+    left, top, width, height = image.left, image.top, image.width, image.height
+    image._parent.add_picture(values, left, top, width, height)  # pylint: disable=protected-access
+    image.element.getparent().remove(image.element)
 
 
 # DOCUMENTATION FUNCTIONS
