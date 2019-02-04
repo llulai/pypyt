@@ -24,9 +24,9 @@ copyright = '2018, Julio Gajardo'
 author = 'Julio Gajardo'
 
 # The short X.Y version
-version = '0.0.23'
+version = '0.0.24'
 # The full version, including alpha/beta/rc tags
-release = '0.0.23'
+release = '0.0.24'
 
 
 # -- General configuration ---------------------------------------------------
@@ -161,5 +161,3 @@ texinfo_documents = [
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
 }
-
-autodoc_mock_imports = ['numpy']
