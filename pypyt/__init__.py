@@ -2,6 +2,7 @@
 import re
 import io
 import webbrowser
+import numpy
 from functools import singledispatch
 from typing import Union
 from pptx import Presentation
