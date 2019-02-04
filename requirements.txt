@@ -33,7 +33,7 @@ sphinxcontrib-napoleon==0.6.1
 sphinxcontrib-websupport==1.0.1
 tqdm==4.23.0
 twine==1.11.0
-urllib3==1.22
+urllib3==1.23
 wincertstore==0.2
 wrapt==1.10.11
 XlsxWriter==1.0.4
