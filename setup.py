@@ -10,7 +10,7 @@ setup(
     license='MIT',
     url='https://gitlab.criteois.com/j.gajardo/pypyt',
     packages=['pypyt'],
-    install_requires=['python-pptx==0.6.15', 'pandas==0.23.4']
+    install_requires=['python-pptx==0.6.15', 'pandas==0.22.0']
 )
 
 __author__ = 'Julio Gajardo'
