@@ -14,8 +14,10 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+import unittest.mock as mock
 
+sys.path.insert(0, os.path.abspath('..'))
+sys.modules['numpy'] = mock.Mock()
 
 # -- Project information -----------------------------------------------------
 
