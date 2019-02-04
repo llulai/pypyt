@@ -162,4 +162,4 @@ source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
 }
 
-suppress_warnings = False
+autodoc_warningiserror = False
