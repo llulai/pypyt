@@ -14,11 +14,8 @@
 #
 import os
 import sys
-import unittest.mock as mock
 
 sys.path.insert(0, os.path.abspath('..'))
-sys.modules['numpy'] = mock.Mock()
-sys.modules['numpy'].__version__ = '1.14.2'
 
 # -- Project information -----------------------------------------------------
 
@@ -164,3 +161,5 @@ texinfo_documents = [
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
 }
+
+suppress_warnings = False
