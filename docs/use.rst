@@ -13,6 +13,9 @@ How-To Guides
 - :ref:`chart`
     - :ref:`chartDict`
     - :ref:`chartDF`
+- :ref:`picture`
+    - :ref:`pictureName`
+    - :ref:`pictureFileLike`
 - :ref:`entirePresentation`
 
 
@@ -38,7 +41,7 @@ Code::
     ...     'slide_title': "Cool insight",
     ... }
 
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 
@@ -59,7 +62,7 @@ Code::
     ...     }
     ... }
 
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 Output
@@ -92,7 +95,7 @@ Code::
     ...     ]
     ... }
 
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 .. _tableDFNoHeader:
@@ -120,7 +123,7 @@ Code::
     2   cell4    cell5    cell6
 
     >>> values = {'table': table_df}
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 .. _tableDFHeader:
@@ -146,7 +149,7 @@ Code::
 
     >>> table_df.header = True
     >>> values = {'table': table_df}
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 Output
@@ -177,7 +180,7 @@ Code::
     ... }
 
 
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 
@@ -219,7 +222,7 @@ Code::
     ...     }
     ... }
 
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 
@@ -260,7 +263,7 @@ Code::
     >>> values = {
     ...     'chart': pd_chart
     ... }
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
 
 
 Output
@@ -272,6 +275,52 @@ How to format a piechart to display percentages
 ...............................................
 
 .. image:: images/format_chart.gif
+
+
+.. _picture:
+
+How to render a picture
+-----------------------
+
+To render a picture, you should add one to your template, this image will be replaced by the selected one as described
+below:
+
+Template
+........
+.. image:: images/template6.png
+
+
+.. _pictureName:
+
+How to render a picture using a file name
+.........................................
+
+To render from a filename, you just need to give the name of the image file to replace as a string.
+
+    >>> values = {
+    ...    'company_logo': 'criteo_logo.png'
+    ...    }
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
+
+
+.. _pictureFileLike:
+
+How to render a picture using a file-like object
+................................................
+
+To render from a file-like object, you just need to pass the object.
+
+    >>> import io
+    >>> with open('criteo_logo.png', 'br') as file:
+    >>>    picture = io.BytesIO(file.read())
+    >>> values = {
+    ...     'company_logo': picture
+    ... }
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
+
+Output
+......
+.. image:: images/output6.png
 
 .. _entirePresentation:
 
@@ -302,4 +351,4 @@ one, you can render all the shapes with the following code::
     ...     }
     ... }
 
-    >>> render_and_save_ppt('__template__.pptx', values, 'rendered_ppt.pptx')
+    >>> render_and_save_template('__template__.pptx', values, 'rendered_ppt.pptx')
