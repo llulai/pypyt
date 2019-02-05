@@ -161,3 +161,5 @@ texinfo_documents = [
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
 }
+
+autodoc_mock_imports = ['numpy']
