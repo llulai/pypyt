@@ -162,4 +162,4 @@ source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
 }
 
-autodoc_mock_imports = ['numpy']
+autodoc_mock_imports = ['numpy', 'pandas']
