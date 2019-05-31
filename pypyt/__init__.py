@@ -243,13 +243,25 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
 
             # depending on what kind of item it is, it renders it
             if is_table(shape):
-                render_table(value, shape.table)
+                try:
+                    render_table(value, shape.table)
+                except:
+                    print('Failed to render Table '+ str(key))
             elif is_paragraph(shape):
-                render_paragraph(value, shape.text_frame)
+                try:
+                    render_paragraph(value, shape.text_frame)
+                except:
+                    print('Failed to render Paragraph '+ str(key))
             elif is_chart(shape):
-                render_chart(value, shape.chart)
+                try:
+                    render_chart(value, shape.chart)
+                except:
+                    print('Failed to render Chart '+ str(key))
             elif is_picture(shape):
-                render_picture(value, shape)
+                try:
+                    render_picture(value, shape)
+                except:
+                    print('Failed to render Picture '+ str(key))
             #except:  # pylint: disable=bare-except
             #    print(f"Failed to render {get_shape_type(shape)} object with key {key}")
 
