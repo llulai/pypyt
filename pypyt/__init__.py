@@ -245,25 +245,23 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
             if is_table(shape):
                 try:
                     render_table(value, shape.table)
-                except:
-                    print('Failed to render Table '+ str(key))
+                except:  # pylint: disable=bare-except
+                    print(f"Failed to render Table {key}")
             elif is_paragraph(shape):
                 try:
                     render_paragraph(value, shape.text_frame)
-                except:
-                    print('Failed to render Paragraph '+ str(key))
+                except:  # pylint: disable=bare-except
+                    print(f"Failed to render Paragraph {key}")
             elif is_chart(shape):
                 try:
                     render_chart(value, shape.chart)
-                except:
-                    print('Failed to render Chart '+ str(key))
+                except:  # pylint: disable=bare-except
+                    print(f"Failed to render Chart {key}")
             elif is_picture(shape):
                 try:
                     render_picture(value, shape)
-                except:
-                    print('Failed to render Picture '+ str(key))
-            #except:  # pylint: disable=bare-except
-            #    print(f"Failed to render {get_shape_type(shape)} object with key {key}")
+                except:  # pylint: disable=bare-except
+                    print(f"Failed to render Picture {key}")
 
     return prs
 
