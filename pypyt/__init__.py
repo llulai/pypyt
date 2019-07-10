@@ -4,6 +4,8 @@ import io
 import webbrowser
 from functools import singledispatch
 from typing import Union
+
+import requests
 from pptx import Presentation
 from pptx.chart.chart import Chart
 from pptx.chart.data import CategoryChartData
@@ -792,6 +794,23 @@ def render_picture(values: Union[str, io.BytesIO], image: Picture) -> None:
     left, top, width, height = image.left, image.top, image.width, image.height
     image._parent.add_picture(values, left, top, width, height)  # pylint: disable=protected-access
     image.element.getparent().remove(image.element)
+
+
+def picture_from_url(url: str) -> io.BytesIO:
+    """
+    Loads an image from a given url.
+
+    Parameters
+    ----------
+    url: string (url from the image)
+
+    Returns
+    -------
+    io.BytesIO:
+            Byte object with the image.
+    """
+    response = requests.get(url)
+    return io.BytesIO(response.content)
 
 
 # DOCUMENTATION FUNCTIONS
