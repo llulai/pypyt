@@ -775,7 +775,7 @@ def render_picture(values: Union[str, io.BytesIO], image: Picture) -> None:
     Render image from image filename
 
     >>> prs = open_template('template.pptx')
-    >>> picture: 'image_file.jpg'
+    >>> picture = 'image_file.jpg'
     >>> shapes = get_shapes_by_name(prs, 'image')
     >>> shape = shapes[0]
     >>> render_picture(picture, shape)
@@ -808,6 +808,17 @@ def picture_from_url(url: str) -> io.BytesIO:
     -------
     io.BytesIO:
             Byte object with the image.
+
+    Examples
+    --------
+
+    Render image from image url
+
+    >>> prs = open_template('template.pptx')
+    >>> url = 'http://yoursite.com/image_file.jpg'
+    >>> shapes = get_shapes_by_name(prs, 'image')
+    >>> shape = shapes[0]
+    >>> render_picture(picture_from_url(url), shape)
     """
     response = requests.get(url)
     return io.BytesIO(response.content)
