@@ -43,6 +43,10 @@ Render Functions:
 * The :func:`render_table` function renders a table object.
 * The :func:`render_picture` function renders a picture object.
 
+Utility Functions:
+
+* The :func:`picture_from_url` function gets an image from the given url.
+
 
 Documentation Functions:
 
@@ -85,6 +89,10 @@ Render Functions
 .. autofunction:: render_table(values, table)
 .. autofunction:: render_picture(values, table)
 
+Utility Functions
+-----------------
+
+.. autofunction:: picture_from_url(url)
 
 Documentation Functions
 -----------------------
