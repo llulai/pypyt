@@ -802,7 +802,8 @@ def picture_from_url(url: str) -> io.BytesIO:
 
     Parameters
     ----------
-    url: string (url from the image)
+    url: string
+        Url from the image
 
     Returns
     -------
