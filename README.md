@@ -54,3 +54,6 @@ send me an email to j.gajardo@criteo.com
 - **(Criteo - New York) Sebastian Riera:** For finding bugs, suggest fixes and new features.
 - **(Criteo - New York) Mehdi Rifai:** For suggesting fixes to bugs.
 - **(Criteo - Brazil) Caio Camilli:** For being the first user of the package and bring up possible points of improvement.
+
+# License
+The contents of this repository are covered under the [MIT License](LICENSE.txt).
