@@ -125,7 +125,8 @@ def _is_default_name(name: str) -> bool:
         'Left',
         'Right',
         'Down',
-        'Subtitle'
+        'Subtitle',
+        'TextBox'
     }
 
     if name.istitle():
