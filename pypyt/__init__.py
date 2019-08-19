@@ -129,7 +129,7 @@ def _is_default_name(name: str) -> bool:
         'TextBox'
     }
 
-    if name.istitle():
+    if name.istitle() or name.startswith('TextBox'):
         return (set(name.split()) & _usual_default_words) != {}
     return False
 
