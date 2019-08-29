@@ -1,4 +1,5 @@
 """Renders PowerPoint presentations easily with Python"""
+import logging
 import re
 import io
 import webbrowser
@@ -42,7 +43,7 @@ def open_template(template_name: str) -> Presentation:
     return Presentation(template_name)
 
 
-def render_template(template_name: str, values: dict) -> Presentation:
+def render_template(template_name: str, values: dict, raise_error=False) -> Presentation:
     """
     Returns a rendered presentation given the template name and values to be rendered.
 
@@ -53,6 +54,10 @@ def render_template(template_name: str, values: dict) -> Presentation:
 
     values: dict
         Dictionary with the values to render on the template.
+
+    raise_error: bool
+        Boolean that indicates whether an error has to be raised or not when is not possible to
+        render a shape
 
     Returns
     -------
@@ -68,10 +73,13 @@ def render_template(template_name: str, values: dict) -> Presentation:
     >>> render_template('template.pptx', values)
     <pptx.presentation.Presentation at ...>
     """
-    return render_ppt(open_template(template_name), values)
+    return render_ppt(open_template(template_name), values, raise_error=raise_error)
 
 
-def render_and_save_template(template_name: str, values: dict, filename: str) -> None:
+def render_and_save_template(template_name: str,
+                             values: dict,
+                             filename: str,
+                             raise_error=False) -> None:
     """
     Renders and save a presentation with the given template name,
     values to be rendered, and filename.
@@ -84,6 +92,10 @@ def render_and_save_template(template_name: str, values: dict, filename: str) ->
     values: dict
         Dictionary with the values to render on the template.
 
+    raise_error: bool
+        Boolean that indicates whether an error has to be raised or not when is not possible to
+        render a shape
+
     filename: str
         Name of the file to be saved.
 
@@ -95,7 +107,7 @@ def render_and_save_template(template_name: str, values: dict, filename: str) ->
     >>> values = {'presentation_title': "My Cool Presentation"}
     >>> render_and_save_template('template.pptx', values, 'presentation.pptx')
     """
-    save_ppt(render_template(template_name, values), filename)
+    save_ppt(render_template(template_name, values, raise_error=raise_error), filename)
 
 
 # PRESENTATION FUNCTIONS
@@ -210,7 +222,7 @@ def get_shapes_by_name(prs: Presentation, name: str) -> list:
     return [shape for slide in prs.slides for shape in slide.shapes if shape.name == name]
 
 
-def render_ppt(prs: Presentation, values: dict) -> Presentation:
+def render_ppt(prs: Presentation, values: dict, raise_error=False) -> Presentation:
     """
     Returns a rendered presentation given the template name and values to be rendered.
 
@@ -221,6 +233,10 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
 
     values: dict
         Dictionary with the values to render on the template.
+
+    raise_error: bool
+        Boolean that indicates whether an error has to be raised or not when is not possible to
+        render a shape
 
     Returns
     -------
@@ -249,27 +265,31 @@ def render_ppt(prs: Presentation, values: dict) -> Presentation:
                 try:
                     render_table(value, shape.table)
                 except:  # pylint: disable=bare-except
-                    print(f"Failed to render Table {key}")
+                    message = f"Failed to render Table {key}"
+                    _warn_or_fail(message, raise_error)
             elif is_paragraph(shape):
                 try:
                     render_paragraph(value, shape.text_frame)
                 except:  # pylint: disable=bare-except
-                    print(f"Failed to render Paragraph {key}")
+                    message = f"Failed to render Paragraph {key}"
+                    _warn_or_fail(message, raise_error)
             elif is_chart(shape):
                 try:
                     render_chart(value, shape.chart)
                 except:  # pylint: disable=bare-except
-                    print(f"Failed to render Chart {key}")
+                    message = f"Failed to render Chart {key}"
+                    _warn_or_fail(message, raise_error)
             elif is_picture(shape):
                 try:
                     render_picture(value, shape)
                 except:  # pylint: disable=bare-except
-                    print(f"Failed to render Picture {key}")
+                    message = f"Failed to render Picture {key}"
+                    _warn_or_fail(message, raise_error)
 
     return prs
 
 
-def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
+def render_and_save_ppt(prs: Presentation, values: dict, filename: str, raise_error=False) -> None:
     """
     Renders and save a presentation with the given template name,
     values to be rendered, and filename.
@@ -285,6 +305,10 @@ def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
     filename: str
         Name of the file to be saved.
 
+    raise_error: bool
+        Boolean that indicates whether an error has to be raised or not when is not possible to
+        render a shape
+
     Examples
     --------
 
@@ -294,7 +318,7 @@ def render_and_save_ppt(prs: Presentation, values: dict, filename: str) -> None:
     >>> prs = open_template('template.pptx')
     >>> render_and_save_ppt(prs, values, 'presentation.pptx')
     """
-    save_ppt(render_ppt(prs, values), filename)
+    save_ppt(render_ppt(prs, values, raise_error=raise_error), filename)
 
 
 def save_ppt(prs: Presentation, filename: str) -> None:
@@ -824,6 +848,13 @@ def picture_from_url(url: str) -> io.BytesIO:
     """
     response = requests.get(url)
     return io.BytesIO(response.content)
+
+
+def _warn_or_fail(message, raise_error=False):
+    if not raise_error:
+        logging.warning(message)
+    else:
+        raise ValueError
 
 
 # DOCUMENTATION FUNCTIONS
