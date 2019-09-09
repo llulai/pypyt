@@ -546,7 +546,7 @@ def render_hyperlink(values, hyperlink) -> None:
     Examples
     --------
 
-    Render a chart from a dictionary
+    Render a hyperlink
 
     >>> prs = open_template('template.pptx')
     >>> hyperlink_value = {

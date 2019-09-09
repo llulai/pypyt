@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='pypyt',
-    version="0.0.5",
+    version="0.1.0",
     author='Julio Gajardo',
     author_email='j.gajardo@criteo.com',
     description='Simple library to render ppt templates in python',
