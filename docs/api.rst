@@ -32,16 +32,18 @@ Shape Functions:
 
 * The :func:`get_shape_type` function gets the type of a shape.
 * The :func:`is_chart` function returns ``True`` if the given shape is a chart.
+* The :func:`is_hyperlink` function returns ``True`` if the given shape is a hyperlink.
 * The :func:`is_paragraph` function returns ``True`` if the given shape is a paragraph.
-* The :func:`is_table` function returns ``True`` if the given shape is a table.
 * The :func:`is_picture` function returns ``True`` if the given shape is a picture.
+* The :func:`is_table` function returns ``True`` if the given shape is a table.
 
 Render Functions:
 
 * The :func:`render_chart` function renders a chart object.
+* The :func:`render_hyperlink` function renders a hyperlink object.
 * The :func:`render_paragraph` function renders a paragraph object.
-* The :func:`render_table` function renders a table object.
 * The :func:`render_picture` function renders a picture object.
+* The :func:`render_table` function renders a table object.
 
 Utility Functions:
 
@@ -76,18 +78,22 @@ Shape Functions
 
 .. autofunction:: get_shape_type(shape)
 .. autofunction:: is_chart(shape)
+.. autofunction:: is_hyperlink(shape)
 .. autofunction:: is_paragraph(shape)
-.. autofunction:: is_table(shape)
 .. autofunction:: is_picture(shape)
+.. autofunction:: is_table(shape)
+
 
 
 Render Functions
 ----------------
 
 .. autofunction:: render_chart(values, chart)
+.. autofunction:: render_hyperlink(values, hyperlink)
 .. autofunction:: render_paragraph(values, text_frame)
-.. autofunction:: render_table(values, table)
 .. autofunction:: render_picture(values, table)
+.. autofunction:: render_table(values, table)
+
 
 Utility Functions
 -----------------

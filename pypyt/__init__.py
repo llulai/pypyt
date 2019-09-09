@@ -113,7 +113,9 @@ def render_and_save_template(template_name: str,
 # PRESENTATION FUNCTIONS
 
 def _create_empty_values(shape) -> Union[str, list, dict]:
-    if is_paragraph(shape):
+    if is_hyperlink(shape):
+        return ''
+    elif is_paragraph(shape):
         placeholders = _get_placeholders(shape.text_frame)
 
         if placeholders:
@@ -261,7 +263,13 @@ def render_ppt(prs: Presentation, values: dict, raise_error=False) -> Presentati
         for shape in get_shapes_by_name(prs, key):
 
             # depending on what kind of item it is, it renders it
-            if is_table(shape):
+            if is_hyperlink(shape):
+                try:
+                    render_hyperlink(value, shape)
+                except:  # pylint: disable=bare-except
+                    message = f"Failed to render Hyperlink {key}"
+                    _warn_or_fail(message, raise_error)
+            elif is_table(shape):
                 try:
                     render_table(value, shape.table)
                 except:  # pylint: disable=bare-except
@@ -373,7 +381,9 @@ def get_shape_type(shape: BaseShape) -> str:
     >>> get_shape_type(shapes[0])
     'paragraph'
     """
-    if is_paragraph(shape):
+    if is_hyperlink(shape):
+        return 'hyperlink'
+    elif is_paragraph(shape):
         return 'paragraph'
     elif is_table(shape):
         return 'table'
@@ -492,7 +502,62 @@ def is_picture(shape: BaseShape) -> bool:
     return isinstance(shape, Picture)
 
 
+def is_hyperlink(shape: BaseShape) -> bool:
+    """
+        Checks whether the given shape is a hyperlink
+
+        Parameters
+        ----------
+        shape: pptx.shapes.base.BaseShape
+            Shape to get whether is a hyperlink or not.
+
+        Returns
+        -------
+        bool:
+            Boolean representing whether the given shape is a hyperlink or not.
+
+        Examples
+        --------
+
+        Check whether the given shape is a hyperlink.
+
+        >>> prs = open_template('template.pptx')
+        >>> shapes = get_shapes_by_name(prs, 'client_name')
+        >>> is_hyperlink(shapes[0])
+        False
+        """
+    return shape.click_action.hyperlink.address is not None
+
+
 # RENDER FUNCTIONS
+
+def render_hyperlink(values, hyperlink) -> None:
+    """
+    Renders the given values into the given hyperlink.
+
+    Parameters
+    ----------
+    values: str
+        Address of the link.
+
+    hyperlink:
+        Hyperlink object to be rendered.
+
+    Examples
+    --------
+
+    Render a chart from a dictionary
+
+    >>> prs = open_template('template.pptx')
+    >>> hyperlink_value = {
+    ...        'https://pypyt.readthedocs.io'
+    ...    }
+    >>> shapes = get_shapes_by_name(prs, 'hyperlink')
+    >>> shape = shapes[0]
+    >>> render_chart(hyperlink_value, shape)
+    """
+    hyperlink.click_action.hyperlink.address = values
+
 
 @singledispatch
 def render_chart(values: Union[dict, DataFrame], chart: Chart) -> None:  # pylint: disable=unused-argument
