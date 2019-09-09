@@ -23,6 +23,18 @@ class FakeSlide:  # pylint: disable=too-few-public-methods
         self.shapes = shapes
 
 
+class FakeHyperlink: # pylint: disable=too-few-public-methods
+    """fake class to test hyperlinks"""
+    def __init__(self):
+        self.address = None
+
+
+class FakeClickAction:  # pylint: disable=too-few-public-methods
+    """fake class to test hyperlinks"""
+    def __init__(self):
+        self.hyperlink = FakeHyperlink()
+
+
 class FakeShape:  # pylint: disable=too-few-public-methods
     """fake class to test shapes"""
     def __init__(self, name: str):
@@ -30,6 +42,7 @@ class FakeShape:  # pylint: disable=too-few-public-methods
         self.has_table = False
         self.has_text_frame = False
         self.has_chart = False
+        self.click_action = FakeClickAction()
 
 
 class FakeParagraph:  # pylint: disable=too-few-public-methods
@@ -95,6 +108,18 @@ class FakeTable:  # pylint: disable=too-few-public-methods
     def __eq__(self, other):
         return (all(row1 == row2 for row1, row2 in zip(self.rows, other.rows))
                 and len(self.rows) == len(other.rows))
+
+
+class FakeHyperlink: # pylint: disable=too-few-public-methods
+    """fake class to test hyperlinks"""
+    def __init__(self):
+        self.address = None
+
+
+class FakeClickAction:  # pylint: disable=too-few-public-methods
+    """fake class to test hyperlinks"""
+    def __init__(self):
+        self.hyperlink = FakeHyperlink()
 
 
 class FakeTableShape(FakeShape):  # pylint: disable=too-few-public-methods
