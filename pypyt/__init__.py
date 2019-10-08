@@ -882,7 +882,8 @@ def render_picture(values: Union[str, io.BytesIO], image: Picture) -> None:
     >>> render_picture(picture, shape)
     """
     left, top, width, height = image.left, image.top, image.width, image.height
-    image._parent.add_picture(values, left, top, width, height)  # pylint: disable=protected-access
+    pic = image._parent.add_picture(values, left, top, width, height)  # pylint: disable=protected-access
+    pic.name = image.name
     image.element.getparent().remove(image.element)
 
 
